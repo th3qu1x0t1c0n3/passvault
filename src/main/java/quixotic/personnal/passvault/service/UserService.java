@@ -59,6 +59,7 @@ public class UserService {
     private User saveUser(User user) {
         return userRepository.save(user);
     }
+
     private String generateToken(String username, String password) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(username, password));

@@ -41,9 +41,9 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(POST, "/api/v1/user/signin").permitAll()
                         .requestMatchers(POST, "/api/v1/user/signup").permitAll()
-                        .requestMatchers(GET, "/api/v1/user/me").hasAnyAuthority("USER")
+                        .requestMatchers(GET, "/api/v1/user/me").hasAnyAuthority("USER", "ADMIN")
 
-                        .requestMatchers("/api/v1/user/**").hasAnyAuthority("USER")
+                        .requestMatchers("/api/v1/user/**").hasAnyAuthority("USER", "ADMIN")
 
                         .anyRequest().denyAll()
                 )
@@ -70,7 +70,7 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    public JwtAuthenticationFilter jwtAuthenticationFilter() throws Exception {
+    public JwtAuthenticationFilter jwtAuthenticationFilter() {
         return new JwtAuthenticationFilter(jwtTokenProvider, userRepository);
     }
 
