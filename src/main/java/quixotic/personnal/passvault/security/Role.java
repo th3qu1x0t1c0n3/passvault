@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.Set;
 
-import static quixotic.personnal.smartcardapi.security.Permission.*;
+import static quixotic.personnal.passvault.security.Permission.*;
 
 @RequiredArgsConstructor
 @Getter

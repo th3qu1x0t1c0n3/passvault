@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import quixotic.personnal.smartcardapi.model.User;
-import quixotic.personnal.smartcardapi.security.Role;
+import quixotic.personnal.passvault.model.User;
+import quixotic.personnal.passvault.security.Role;
 
 @Data
 @AllArgsConstructor

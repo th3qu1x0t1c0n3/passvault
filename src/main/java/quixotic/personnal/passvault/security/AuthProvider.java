@@ -8,10 +8,10 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import quixotic.personnal.smartcardapi.exception.badRequestException.UserNotFoundException;
-import quixotic.personnal.smartcardapi.exception.forbiddenRequestExceptions.InvalidJwtException;
-import quixotic.personnal.smartcardapi.model.User;
-import quixotic.personnal.smartcardapi.repository.UserRepository;
+import quixotic.personnal.passvault.exception.badRequestException.UserNotFoundException;
+import quixotic.personnal.passvault.exception.forbiddenRequestExceptions.InvalidJwtException;
+import quixotic.personnal.passvault.model.User;
+import quixotic.personnal.passvault.repository.UserRepository;
 
 
 @Component

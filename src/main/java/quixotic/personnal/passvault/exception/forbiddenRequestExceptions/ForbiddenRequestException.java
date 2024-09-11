@@ -1,7 +1,7 @@
 package quixotic.personnal.passvault.exception.forbiddenRequestExceptions;
 
 
-import quixotic.personnal.smartcardapi.exception.APIException;
+import quixotic.personnal.passvault.exception.APIException;
 
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 

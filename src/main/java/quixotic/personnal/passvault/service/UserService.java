@@ -6,13 +6,13 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import quixotic.personnal.smartcardapi.dto.SignInDTO;
-import quixotic.personnal.smartcardapi.dto.SignUpDTO;
-import quixotic.personnal.smartcardapi.dto.UserDTO;
-import quixotic.personnal.smartcardapi.model.User;
-import quixotic.personnal.smartcardapi.repository.UserRepository;
-import quixotic.personnal.smartcardapi.security.JwtTokenProvider;
-import quixotic.personnal.smartcardapi.security.Role;
+import quixotic.personnal.passvault.dto.SignInDTO;
+import quixotic.personnal.passvault.dto.SignUpDTO;
+import quixotic.personnal.passvault.dto.UserDTO;
+import quixotic.personnal.passvault.model.User;
+import quixotic.personnal.passvault.repository.UserRepository;
+import quixotic.personnal.passvault.security.JwtTokenProvider;
+import quixotic.personnal.passvault.security.Role;
 
 @Service
 @RequiredArgsConstructor

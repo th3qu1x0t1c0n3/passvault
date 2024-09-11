@@ -1,7 +1,7 @@
 package quixotic.personnal.passvault.exception.goneRequestException;
 
 
-import quixotic.personnal.smartcardapi.exception.APIException;
+import quixotic.personnal.passvault.exception.APIException;
 
 import static org.springframework.http.HttpStatus.GONE;
 

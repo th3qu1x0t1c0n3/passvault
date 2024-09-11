@@ -3,7 +3,7 @@ package quixotic.personnal.passvault.security;
 import io.jsonwebtoken.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
-import quixotic.personnal.smartcardapi.exception.forbiddenRequestExceptions.InvalidJwtException;
+import quixotic.personnal.passvault.exception.forbiddenRequestExceptions.InvalidJwtException;
 
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;

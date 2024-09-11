@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import quixotic.personnal.smartcardapi.dto.SignInDTO;
-import quixotic.personnal.smartcardapi.dto.SignUpDTO;
-import quixotic.personnal.smartcardapi.dto.UserDTO;
-import quixotic.personnal.smartcardapi.service.UserService;
+import quixotic.personnal.passvault.dto.SignInDTO;
+import quixotic.personnal.passvault.dto.SignUpDTO;
+import quixotic.personnal.passvault.dto.UserDTO;
+import quixotic.personnal.passvault.service.UserService;
 
 @Controller
 @RequiredArgsConstructor

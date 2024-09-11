@@ -1,7 +1,7 @@
 package quixotic.personnal.passvault.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import quixotic.personnal.smartcardapi.model.User;
+import quixotic.personnal.passvault.model.User;
 
 import java.util.Optional;
 

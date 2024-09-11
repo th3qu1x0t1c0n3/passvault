@@ -9,9 +9,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
-import quixotic.personnal.smartcardapi.exception.badRequestException.UserNotFoundException;
-import quixotic.personnal.smartcardapi.model.User;
-import quixotic.personnal.smartcardapi.repository.UserRepository;
+import quixotic.personnal.passvault.exception.badRequestException.UserNotFoundException;
+import quixotic.personnal.passvault.model.User;
+import quixotic.personnal.passvault.repository.UserRepository;
 
 import java.io.IOException;
 
