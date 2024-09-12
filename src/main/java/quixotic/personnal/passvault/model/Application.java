@@ -22,5 +22,15 @@ public class Application {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Account> accounts;
 
+    public void addAccount(Account account) {
+        accounts.add(account);
+    }
+
+    public void removeAccount(Account account) {
+        if (accounts.isEmpty()){
+            return;
+        }
+        accounts.remove(account);
+    }
 
 }
