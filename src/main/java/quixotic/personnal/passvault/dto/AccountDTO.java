@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import quixotic.personnal.passvault.model.Account;
+import quixotic.personnal.passvault.model.Application;
 
 @Data
 @AllArgsConstructor

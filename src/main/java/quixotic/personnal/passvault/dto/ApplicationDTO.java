@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import quixotic.personnal.passvault.model.Application;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,9 +32,9 @@ public class ApplicationDTO {
         return Application.builder()
                 .id(id)
                 .name(name)
-                .accounts(accounts.stream()
+                .accounts(accounts != null ? accounts.stream()
                         .map(AccountDTO::toEntity)
-                        .collect(Collectors.toList()))
+                        .collect(Collectors.toList()) : new ArrayList<>())
                 .build();
     }
 

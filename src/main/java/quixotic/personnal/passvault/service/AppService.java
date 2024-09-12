@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 public class AppService {
     private final JwtTokenProvider jwtTokenProvider;
     private final ApplicationRepository applicationRepository;
-    private final AccountRepository accountRepository;
 
     public ApplicationDTO createApp(ApplicationDTO applicationDTO) {
         return new ApplicationDTO(applicationRepository.save(applicationDTO.toEntity()));
@@ -24,7 +23,7 @@ public class AppService {
     public List<ApplicationDTO> getAllAppsByUser(String token) {
         String username = jwtTokenProvider.getUsernameFromJWT(token);
 
-        return applicationRepository.findAll().stream()
+        return applicationRepository.findAllByOwner_Username(username).stream()
                 .map(ApplicationDTO::new)
                 .collect(Collectors.toList());
     }
@@ -33,8 +32,18 @@ public class AppService {
         return new ApplicationDTO(applicationRepository.findById(id).orElseThrow());
     }
 
-//    public ApplicationDTO getAppByName(String name) {
-//        return new ApplicationDTO(applicationRepository.findByName(name).orElseThrow());
-//    }
+    public ApplicationDTO getAppByName(String token, String name) {
+        String username = jwtTokenProvider.getUsernameFromJWT(token);
+
+        return new ApplicationDTO(applicationRepository.findByNameAndOwner_Username(name, username).orElseThrow());
+    }
+
+    public ApplicationDTO updateApp(ApplicationDTO applicationDTO) {
+        return new ApplicationDTO(applicationRepository.save(applicationDTO.toEntity()));
+    }
+
+    public void deleteAppById(Long id) {
+        applicationRepository.deleteById(id);
+    }
 
 }
