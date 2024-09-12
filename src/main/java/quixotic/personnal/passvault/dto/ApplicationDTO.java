@@ -14,10 +14,13 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @Builder
 public class ApplicationDTO {
+    private Long id;
     private String name;
+    private UserDTO owner;
     private List<AccountDTO> accounts;
 
     public ApplicationDTO(Application application) {
+        this.id = application.getId();
         this.name = application.getName();
         this.accounts = application.getAccounts().stream()
                 .map(AccountDTO::new)
@@ -26,6 +29,7 @@ public class ApplicationDTO {
 
     public Application toEntity() {
         return Application.builder()
+                .id(id)
                 .name(name)
                 .accounts(accounts.stream()
                         .map(AccountDTO::toEntity)

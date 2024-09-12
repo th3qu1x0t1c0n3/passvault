@@ -16,7 +16,6 @@ public class UserDTO {
     private String username;
     private String password;
     private Role role;
-    private String groupe;
     private String token;
 
     public UserDTO(User user) {
@@ -24,7 +23,6 @@ public class UserDTO {
         this.username = user.getUsername();
         this.password = user.getPassword();
         this.role = user.getRole();
-        this.groupe = user.getGroupe();
     }
 
     public UserDTO(User user, String token) {
@@ -32,7 +30,6 @@ public class UserDTO {
         this.username = user.getUsername();
         this.password = user.getPassword();
         this.role = user.getRole();
-        this.groupe = user.getGroupe();
         this.token = token;
     }
 
@@ -42,7 +39,6 @@ public class UserDTO {
                 .username(this.username)
                 .password(this.password)
                 .role(this.role)
-                .groupe(this.groupe)
                 .build();
     }
 }
