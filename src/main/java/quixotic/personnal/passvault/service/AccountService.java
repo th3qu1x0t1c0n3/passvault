@@ -20,13 +20,13 @@ public class AccountService {
     private final JwtTokenProvider jwtTokenProvider;
     private final ApplicationRepository applicationRepository;
     private final AccountRepository accountRepository;
-    private final PasswordEncoder passwordEncoder;
+//    private final PasswordEncoder passwordEncoder;
 
 
     public AccountDTO addAccount(String token, AccountDTO accountDTO) {
         checkUser(token, applicationRepository.findById(accountDTO.getApplicationId()).orElseThrow());
         Account account = accountDTO.toEntity();
-        account.setPassword(passwordEncoder.encode(account.getPassword()));
+//        account.setPassword(passwordEncoder.encode(account.getPassword()));
 
         Application application = applicationRepository.findById(accountDTO.getApplicationId()).orElseThrow();
         account.setApplication(application);
@@ -38,6 +38,11 @@ public class AccountService {
     public List<AccountDTO> getAccountByApplicationId(Long id) {
         return accountRepository.findAllByApplication_Id(id).stream()
                 .map(AccountDTO::new)
+//                .map((Account account) -> {
+//                    AccountDTO accountDTO = new AccountDTO(accountRepository.findById(id).orElseThrow());
+//                    accountDTO.setPassword(passwordEncoder.encode(accountDTO.getPassword()));
+//                    return accountDTO;
+//                })
                 .collect(Collectors.toList());
     }
 
@@ -45,7 +50,7 @@ public class AccountService {
         Account account = accountRepository.findById(accountDTO.getId()).orElseThrow();
         checkUser(token, account.getApplication());
         account.update(accountDTO);
-        account.setPassword(passwordEncoder.encode(account.getPassword()));
+//        account.setPassword(passwordEncoder.encode(account.getPassword()));
         return new AccountDTO(accountRepository.save(account));
     }
 
