@@ -1,5 +1,6 @@
 package quixotic.personnal.passvault.controller;
 
+import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -26,13 +27,13 @@ public class AppController {
         return ResponseEntity.accepted().body(appService.getAllAppsByUser(token));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ApplicationDTO> getAppById(@PathVariable Long id) {
+    @GetMapping("")
+    public ResponseEntity<ApplicationDTO> getAppById(@PathParam("id") Long id) {
         return ResponseEntity.accepted().body(appService.getAppById(id));
     }
 
-    @GetMapping("/name/{name}")
-    public ResponseEntity<ApplicationDTO> getAppByName(@RequestHeader("Authorization") String token, @PathVariable String name) {
+    @GetMapping("/name")
+    public ResponseEntity<ApplicationDTO> getAppByName(@RequestHeader("Authorization") String token, @PathParam("name") String name) {
         return ResponseEntity.accepted().body(appService.getAppByName(token, name));
     }
 
@@ -41,8 +42,8 @@ public class AppController {
         return ResponseEntity.accepted().body(appService.updateNameApp(applicationDTO));
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteAppById(@PathVariable Long id) {
+    @DeleteMapping("/delete")
+    public ResponseEntity<Void> deleteAppById(@PathParam("id") Long id) {
         appService.deleteAppById(id);
         return ResponseEntity.noContent().build();
     }

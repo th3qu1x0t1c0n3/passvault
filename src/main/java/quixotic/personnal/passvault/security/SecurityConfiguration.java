@@ -44,6 +44,7 @@ public class SecurityConfiguration {
                         .requestMatchers(GET, "/api/v1/user/me").hasAnyAuthority("USER", "ADMIN")
 
                         .requestMatchers("/api/v1/apps/**").hasAnyAuthority("USER", "ADMIN")
+                        .requestMatchers("/api/v1/account/**").hasAnyAuthority("USER", "ADMIN")
 
                         .anyRequest().denyAll()
                 )

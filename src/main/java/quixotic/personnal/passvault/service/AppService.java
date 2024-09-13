@@ -41,7 +41,7 @@ public class AppService {
     public ApplicationDTO getAppByName(String token, String name) {
         String username = jwtTokenProvider.getUsernameFromJWT(token);
 
-        return new ApplicationDTO(applicationRepository.findByNameAndOwner_Username(name, username).orElseThrow());
+        return new ApplicationDTO(applicationRepository.findByNameIgnoreCaseAndOwner_Username(name, username).orElseThrow());
     }
 
     public ApplicationDTO updateNameApp(ApplicationDTO applicationDTO) {

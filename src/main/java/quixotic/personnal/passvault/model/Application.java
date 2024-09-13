@@ -19,7 +19,7 @@ public class Application {
     private Long id;
 
     private String name;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private User owner;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Account> accounts;
@@ -32,6 +32,7 @@ public class Application {
         if (accounts.isEmpty()){
             return;
         }
+        account.setApplication(null);
         accounts.remove(account);
     }
 

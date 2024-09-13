@@ -21,13 +21,13 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/signin")
-    public ResponseEntity<UserDTO> authenticateCook(@RequestBody SignInDTO signInDTO){
+    public ResponseEntity<UserDTO> authenticateUser(@RequestBody SignInDTO signInDTO){
         return ResponseEntity.accepted().contentType(MediaType.APPLICATION_JSON)
                 .body(userService.authenticateUser(signInDTO));
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<UserDTO> signupCook(@RequestBody SignUpDTO signUpDTO){
+    public ResponseEntity<UserDTO> signupUser(@RequestBody SignUpDTO signUpDTO){
         return ResponseEntity.accepted().contentType(MediaType.APPLICATION_JSON)
                 .body(userService.createUser(signUpDTO));
     }

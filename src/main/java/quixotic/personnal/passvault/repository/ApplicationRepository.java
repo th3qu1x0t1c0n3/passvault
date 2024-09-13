@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface ApplicationRepository extends JpaRepository<Application, Long> {
     List<Application> findAllByOwner_Username(String username);
-    Optional<Application> findByNameAndOwner_Username(String name, String username);
+    Optional<Application> findByNameIgnoreCaseAndOwner_Username(String name, String username);
 }
