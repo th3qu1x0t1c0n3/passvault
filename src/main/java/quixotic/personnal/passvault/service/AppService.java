@@ -3,8 +3,10 @@ package quixotic.personnal.passvault.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import quixotic.personnal.passvault.dto.ApplicationDTO;
+import quixotic.personnal.passvault.model.Application;
 import quixotic.personnal.passvault.repository.AccountRepository;
 import quixotic.personnal.passvault.repository.ApplicationRepository;
+import quixotic.personnal.passvault.repository.UserRepository;
 import quixotic.personnal.passvault.security.JwtTokenProvider;
 
 import java.util.List;
@@ -14,10 +16,14 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AppService {
     private final JwtTokenProvider jwtTokenProvider;
+    private final UserRepository userRepository;
     private final ApplicationRepository applicationRepository;
 
-    public ApplicationDTO createApp(ApplicationDTO applicationDTO) {
-        return new ApplicationDTO(applicationRepository.save(applicationDTO.toEntity()));
+    public ApplicationDTO createApp(String token, ApplicationDTO applicationDTO) {
+        Application application = applicationDTO.toEntity();
+        application.setOwner(userRepository.findByUsername(jwtTokenProvider.getUsernameFromJWT(token)).orElseThrow());
+
+        return new ApplicationDTO(applicationRepository.save(application));
     }
 
     public List<ApplicationDTO> getAllAppsByUser(String token) {
@@ -38,8 +44,10 @@ public class AppService {
         return new ApplicationDTO(applicationRepository.findByNameAndOwner_Username(name, username).orElseThrow());
     }
 
-    public ApplicationDTO updateApp(ApplicationDTO applicationDTO) {
-        return new ApplicationDTO(applicationRepository.save(applicationDTO.toEntity()));
+    public ApplicationDTO updateNameApp(ApplicationDTO applicationDTO) {
+        Application application = applicationRepository.findById(applicationDTO.getId()).orElseThrow();
+        application.setName(applicationDTO.getName());
+        return new ApplicationDTO(applicationRepository.save(application));
     }
 
     public void deleteAppById(Long id) {

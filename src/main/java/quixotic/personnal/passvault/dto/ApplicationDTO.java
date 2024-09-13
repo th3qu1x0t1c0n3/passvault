@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 public class ApplicationDTO {
     private Long id;
     private String name;
-    private UserDTO owner;
     private List<AccountDTO> accounts;
 
     public ApplicationDTO(Application application) {

@@ -46,6 +46,11 @@ public class JwtTokenProvider{
 	}
 
     public String getUsernameFromJWT(String token) {
+		if (token == null) {
+			return null;
+		} else if (token.startsWith("Bearer ")) {
+			token = token.substring(7);
+		}
 		return Jwts.parserBuilder()
 				.setSigningKey(apiKeySecretBytes)
 				.build()
