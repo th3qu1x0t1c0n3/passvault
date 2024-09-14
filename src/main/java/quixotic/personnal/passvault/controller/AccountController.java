@@ -10,7 +10,7 @@ import quixotic.personnal.passvault.service.AccountService;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/account")
 public class AccountController {
