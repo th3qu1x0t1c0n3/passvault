@@ -20,7 +20,7 @@ public class AccountService {
     private final JwtTokenProvider jwtTokenProvider;
     private final ApplicationRepository applicationRepository;
     private final AccountRepository accountRepository;
-//    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
 
     public AccountDTO addAccount(String token, AccountDTO accountDTO) {
