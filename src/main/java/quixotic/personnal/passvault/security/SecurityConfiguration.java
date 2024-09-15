@@ -20,8 +20,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 import quixotic.personnal.passvault.repository.UserRepository;
 
-import static org.springframework.http.HttpMethod.GET;
-import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.HttpMethod.*;
 
 @Configuration
 @EnableWebSecurity
@@ -45,6 +44,7 @@ public class SecurityConfiguration {
                         .requestMatchers(POST, "/api/v1/user/signin").permitAll()
                         .requestMatchers(POST, "/api/v1/user/signup").permitAll()
                         .requestMatchers(GET, "/api/v1/user/me").hasAnyAuthority("USER", "ADMIN")
+                        .requestMatchers(PUT, "/api/v1/user/pwd").hasAnyAuthority("USER", "ADMIN")
 
                         .requestMatchers("/api/v1/apps/**").hasAnyAuthority("USER", "ADMIN")
                         .requestMatchers("/api/v1/account/**").hasAnyAuthority("USER", "ADMIN")

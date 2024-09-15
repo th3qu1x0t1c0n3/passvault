@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import quixotic.personnal.passvault.dto.SignInDTO;
 import quixotic.personnal.passvault.dto.SignUpDTO;
 import quixotic.personnal.passvault.dto.UserDTO;
+import quixotic.personnal.passvault.exception.forbiddenRequestExceptions.WrongUserException;
 import quixotic.personnal.passvault.model.User;
 import quixotic.personnal.passvault.repository.UserRepository;
 import quixotic.personnal.passvault.security.JwtTokenProvider;
@@ -64,5 +65,16 @@ public class UserService {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(username, password));
         return jwtTokenProvider.generateToken(authentication);
+    }
+
+    public UserDTO updatePassword(String token, UserDTO userDTO) {
+        String username = jwtTokenProvider.getUsernameFromJWT(token);
+        if (!username.equals(userDTO.getUsername())) {
+            throw new WrongUserException();
+        }
+        User user = userRepository.findByUsername(username).orElseThrow();
+        passwordEncoder.matches(userDTO.getPassword(), user.getPassword());
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        return new UserDTO(userRepository.save(user));
     }
 }

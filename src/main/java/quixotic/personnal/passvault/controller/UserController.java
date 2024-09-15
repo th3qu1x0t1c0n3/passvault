@@ -29,6 +29,12 @@ public class UserController {
                 .body(userService.createUser(signUpDTO));
     }
 
+    @PutMapping("/pwd")
+    public ResponseEntity<UserDTO> updatePassword(@RequestBody UserDTO userDTO, @RequestHeader("Authorization") String token){
+        return ResponseEntity.accepted().contentType(MediaType.APPLICATION_JSON)
+                .body(userService.updatePassword(token, userDTO));
+    }
+
     @GetMapping("/me")
     public ResponseEntity<UserDTO> getMe(HttpServletRequest request){
         return ResponseEntity.accepted().contentType(MediaType.APPLICATION_JSON).body(

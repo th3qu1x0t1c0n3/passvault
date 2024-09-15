@@ -19,7 +19,7 @@ public class Application {
     private Long id;
 
     private String name;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private User owner;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Account> accounts;
