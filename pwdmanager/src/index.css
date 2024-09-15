@@ -1,0 +1,29 @@
+:root {
+  --pwdm-one-color: #000000EF;
+  --pwdm-two-color: #14213D;
+  --pwdm-three-color: #FCA311;
+  --pwdm-four-color: #E5E5E5;
+  --pwdm-five-color: #FFFFFF;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+input {
+  color: var(--pwdm-one-color);
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
+}
