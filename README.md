@@ -71,4 +71,4 @@ Contributions are welcome! Please fork the repository and create a pull request 
 This project is licensed under the MIT License. See the `LICENSE` file for details.
 
 ## Contact
-For any inquiries or issues, please contact [your email].
+For any inquiries or issues, please contact `quixotics317@gmail.com`.
