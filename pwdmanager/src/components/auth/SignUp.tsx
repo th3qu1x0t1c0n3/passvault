@@ -1,6 +1,8 @@
-import FormInput from "../../assets/models/Form";
+import FormInput, {IButton} from "../../assets/models/Form";
 import {FormEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import Button from "../utils/Button";
+import Form from "../utils/Form";
 
 function SignUp() {
     const navigate = useNavigate();
@@ -15,6 +17,16 @@ function SignUp() {
         new FormInput('password', 'password', 'Password', ''),
         new FormInput('confirmPassword', 'password', 'Confirm Password', '')
     ])
+    const signinButton: IButton[] = [
+        {
+            text: 'Sign up',
+            type: 'submit'
+        },
+        {
+            text: 'Reset',
+            type: 'reset'
+        }
+    ]
 
     function handleCreationChange(e: any) {
         setCreateFromInfo(createFormInfo.map((formInfo) => {
@@ -27,6 +39,7 @@ function SignUp() {
 
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
+        console.log("Sign up form submitted");
     }
 
     return (
@@ -46,12 +59,10 @@ function SignUp() {
                     }
                 </div>
 
-                <button type="submit"
-                        className="border border-pwdm text-pwdm hover:bg-pwdm hover:text-pwdm-orange rounded transition ease-in duration-200 p-2 mx-5">
-                    Sign Up
-                </button>
+                <Button type={"submit"} text={"Sign up"}/>
             </form>
 
+            <Form formInputs={createFormInfo} handleSubmit={handleSubmit} handleChange={handleCreationChange} buttons={signinButton}/>
         </div>
     );
 }

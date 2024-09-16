@@ -1,9 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
-  --pwdm-one-color: #000000EF;
-  --pwdm-two-color: #14213D;
-  --pwdm-three-color: #FCA311;
-  --pwdm-four-color: #E5E5E5;
-  --pwdm-five-color: #FFFFFF;
+  --pwdm-one-color: #0a1128;
+  --pwdm-two-color: #001f54;
+  --pwdm-three-color: #034078;
+  --pwdm-four-color: #1282a2;
+  --pwdm-five-color: #fefcfb;
 }
 
 .clickable {

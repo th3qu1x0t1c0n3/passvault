@@ -5,6 +5,12 @@ export interface IFormInput {
     warning: string;
 }
 
+export interface IButton {
+    type: "submit" | "reset" | "button" | undefined;
+    text: string;
+    onClick?: () => void;
+}
+
 class FormInput implements IFormInput {
     name: string;
     type: string;

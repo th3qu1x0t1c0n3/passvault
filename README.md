@@ -9,6 +9,7 @@ PassVault is a secure and efficient password manager built using Java and Spring
 - JWT token-based authentication
 - Role-based access control (Admin and User)
 - CRUD operations for applications and passwords
+- [Palet used here](https://coolors.co/palette/0a1128-001f54-034078-1282a2-fefcfb)
 
 ## Technologies Used
 - Java
