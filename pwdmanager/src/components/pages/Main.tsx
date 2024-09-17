@@ -14,10 +14,6 @@ function Main() {
     const userService = new UserService();
     const [user, setUser] = useState<IUser | null>(null);
 
-    function handleSignOut() {
-        setUser(null);
-    }
-
     useEffect(() => {
         const token = sessionStorage.getItem('token');
         if (token && user === null) {
