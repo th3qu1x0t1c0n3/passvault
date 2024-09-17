@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import CryptoJS from 'crypto-js';
 
 // Function to encrypt the data
-function encrypt(masterPassword: string, data: string): string {
+export function encrypt(masterPassword: string, data: string): string {
     const salt = CryptoJS.lib.WordArray.random(128 / 8);  // Generate a random salt
     const key = CryptoJS.PBKDF2(masterPassword, salt, { keySize: 256 / 32, iterations: 1000 });
 
@@ -14,7 +14,7 @@ function encrypt(masterPassword: string, data: string): string {
 }
 
 // Function to decrypt the data
-function decrypt(masterPassword: string, encryptedData: string): string {
+export function decrypt(masterPassword: string, encryptedData: string): string {
     const salt = CryptoJS.enc.Hex.parse(encryptedData.substr(0, 32));  // Extract the salt (first 32 hex chars)
     const iv = CryptoJS.enc.Hex.parse(encryptedData.substr(32, 32));  // Extract the IV (next 32 hex chars)
     const ciphertext = encryptedData.substr(64);  // Extract the ciphertext (after the first 64 chars)

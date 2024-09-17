@@ -1,5 +1,6 @@
 import {IAccount} from "../../assets/models/Vault";
 import AccountView from "./AccountView";
+import {useEffect, useState} from "react";
 
 interface AccountListProps {
     accounts: IAccount[];
@@ -7,9 +8,11 @@ interface AccountListProps {
 }
 
 function AccountList({accounts}: AccountListProps) {
+
     function catchEvent(e: any) {
         e.stopPropagation();
     }
+
     return (
         <div className={"text-center col-span-2 "} onClick={catchEvent}>
             <h1 className={"text-2xl"}>Accounts</h1>

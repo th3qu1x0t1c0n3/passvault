@@ -21,7 +21,7 @@ function PasswordView({password}: { password: string }) {
             toast.error("Failed to copy password: ", err);
         });
     }
-
+    
     return (
         <div className={"grid-cols-2 grid gap-1 text-right"}>
             <h1 className={`rounded-md p-1 w-full text-pwdm-four mx-auto`}>{pwToShow()}</h1>
