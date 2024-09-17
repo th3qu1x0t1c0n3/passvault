@@ -7,7 +7,7 @@ interface AccountViewProps {
 
 function AccountView({account}: AccountViewProps) {
     return (
-        <div key={account.id} className="bg-pwdm-two p-3 rounded-lg shadow-lg grid grid-cols-3 gap-1">
+        <div key={account.id} className="bg-pwdm-one p-3 rounded-lg shadow-lg grid grid-cols-3 gap-1">
             <h1 className="font-semibold">{account.email}</h1>
             <h1 className="font-semibold">{account.username}</h1>
             <PasswordView password={account.password}/>
