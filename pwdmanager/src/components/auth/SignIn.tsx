@@ -1,10 +1,14 @@
 import {useNavigate} from "react-router-dom";
 import {FormEvent, useState} from "react";
-import FormInput, {IButton} from "../../assets/models/Form";
+import FormInput, {IButton, ISignProps} from "../../assets/models/Form";
 import Form from "../utils/Form";
+import {UserService} from "../../services/UserService";
+import {toast} from "react-toastify";
+import {PwdmanagerServerInstance} from "../../App";
 
-function SignIn() {
+function SignIn({setUser}: ISignProps) {
     const navigate = useNavigate();
+    const userService = new UserService();
 
     const [signinForm, setSigninForm] = useState({
         username: '',
@@ -26,7 +30,7 @@ function SignIn() {
         {
             text: 'Go Sign up',
             type: 'button',
-            onClick: () => navigate('/signin')
+            onClick: () => navigate('/signup')
         }
     ]
 
@@ -41,7 +45,18 @@ function SignIn() {
 
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
-        console.log("Sign in form submitted");
+
+        userService.signIn(signinForm).then(response => {
+            setUser(response);
+            localStorage.setItem('token', response.token);
+            PwdmanagerServerInstance.defaults.headers.common['Authorization'] = response.token;
+            toast.success("Signed In Successfully!");
+
+            navigate('/u/');
+        }).catch(error => {
+            toast.error(error.response?.data.message);
+            console.log(error);
+        })
     }
 
     return (

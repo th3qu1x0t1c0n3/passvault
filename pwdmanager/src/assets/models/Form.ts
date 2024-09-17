@@ -11,6 +11,10 @@ export interface IButton {
     onClick?: () => void;
 }
 
+export interface ISignProps {
+    setUser: (user: any) => void;
+}
+
 class FormInput implements IFormInput {
     name: string;
     type: string;

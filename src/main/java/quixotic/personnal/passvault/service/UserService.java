@@ -54,7 +54,9 @@ public class UserService {
 
     public UserDTO getMe(String token) {
         String username = jwtTokenProvider.getUsernameFromJWT(token);
-        return new UserDTO(userRepository.findByUsername(username).orElseThrow());
+        UserDTO user = new UserDTO(userRepository.findByUsername(username).orElseThrow());
+        user.setToken(token);
+        return user;
     }
 
     private User saveUser(User user) {

@@ -27,6 +27,7 @@ public class PassvaultApplication implements CommandLineRunner {
 		userService.createUser(SignUpDTO.builder()
 				.username("tester")
 				.password("admin")
+				.confirmPassword("admin")
 				.build());
 	}
 }

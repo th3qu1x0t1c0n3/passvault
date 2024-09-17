@@ -14,9 +14,13 @@ import quixotic.personnal.passvault.security.Role;
 public class SignUpDTO {
     private String username;
     private String password;
+    private String confirmPassword;
 
     public User toUser() {
 //        Validation.validateSignIn(this);
+        if (!password.equals(confirmPassword)) {
+            throw new IllegalArgumentException("Passwords do not match");
+        }
         return User.builder()
                 .username(username)
                 .role(Role.USER)

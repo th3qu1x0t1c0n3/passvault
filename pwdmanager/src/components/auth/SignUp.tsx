@@ -1,11 +1,14 @@
-import FormInput, {IButton} from "../../assets/models/Form";
+import FormInput, {IButton, ISignProps} from "../../assets/models/Form";
 import {FormEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import Button from "../utils/Button";
 import Form from "../utils/Form";
+import {UserService} from "../../services/UserService";
+import {toast} from "react-toastify";
+import {PwdmanagerServerInstance} from "../../App";
 
-function SignUp() {
+function SignUp({setUser}: ISignProps) {
     const navigate = useNavigate();
+    const userService = new UserService();
 
     const [creationForm, setCreationForm] = useState({
         username: '',
@@ -44,7 +47,19 @@ function SignUp() {
 
     function handleSubmit(e: FormEvent) {
         e.preventDefault();
-        console.log("Sign up form submitted");
+
+        userService.signUp(creationForm).then(response => {
+            setUser(response);
+            localStorage.setItem('token', response.token);
+            PwdmanagerServerInstance.defaults.headers.common['Authorization'] = response.token;
+            toast.success("Signed In Successfully!");
+
+            navigate('/u/');
+        }).catch(error => {
+            console.log(error);
+            toast.error(error.response?.data.message);
+        })
+
 
 
     }

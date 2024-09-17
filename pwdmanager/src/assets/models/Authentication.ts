@@ -17,4 +17,5 @@ export interface IsignIn {
 export interface IsignUp {
     username: string;
     password: string;
+    confirmPassword: string;
 }
