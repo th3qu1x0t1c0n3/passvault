@@ -1,17 +1,7 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import CryptoJS from "crypto-js";
-
-function decrypt(masterPassword: string, encryptedData: string): string {
-    const salt = CryptoJS.enc.Hex.parse(encryptedData.substr(0, 32));  // Extract the salt (first 32 hex chars)
-    const iv = CryptoJS.enc.Hex.parse(encryptedData.substr(32, 32));  // Extract the IV (next 32 hex chars)
-    const ciphertext = encryptedData.substr(64);  // Extract the ciphertext (after the first 64 chars)
-
-    const key = CryptoJS.PBKDF2(masterPassword, salt, { keySize: 256 / 32, iterations: 1000 });
-    const decrypted = CryptoJS.AES.decrypt(ciphertext, key, { iv: iv });
-
-    return decrypted.toString(CryptoJS.enc.Utf8);  // Convert from WordArray to string
-}
+import {decrypt} from "../EncryptionDecryption";
 
 function PasswordPopup({ password }: { password: string }) {
     const [showPassword, setShowPassword] = useState(false);

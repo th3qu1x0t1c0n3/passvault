@@ -2,7 +2,7 @@ import {IAccount, IApplication} from "../../assets/models/Vault";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowUpRightFromSquare} from "@fortawesome/free-solid-svg-icons";
 import AccountList from "../Accounts/AccountList";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {toast} from "react-toastify";
 import Button from "../utils/Button";
 import {decrypt} from "../EncryptionDecryption";
@@ -16,6 +16,7 @@ function ApplicationView({application}: ApplicationViewProps) {
     const [showPopup, setShowPopup] = useState<boolean>(false);
     const [masterPassword, setMasterPassword] = useState<string>("");
     const [accounts, setAccounts] = useState<IAccount[]>([]);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         if (open) {
@@ -24,6 +25,12 @@ function ApplicationView({application}: ApplicationViewProps) {
             setAccounts([]);
         }
     }, [open]);
+
+    useEffect(() => {
+        if (showPopup) {
+            inputRef.current?.focus();
+        }
+    }, [showPopup]);
 
     function handleNavigate(url: string) {
         if (url && url.includes("http")) {
@@ -59,7 +66,7 @@ function ApplicationView({application}: ApplicationViewProps) {
                  onClick={() => setOpen(!open)}>
                 <h1 className="text-2xl ml-9 font-semibold">{application.name}</h1>
                 <h1 className="text-right">
-                    {application.url}
+                    <span className={"mx-2"}>{application.url}</span>
                     <FontAwesomeIcon className={"clickable"}
                                      onClick={() => handleNavigate(application.url)}
                                      icon={faArrowUpRightFromSquare}/>
@@ -75,6 +82,7 @@ function ApplicationView({application}: ApplicationViewProps) {
                     <form className="bg-pwdm-one p-6 rounded-lg shadow-lg">
                         <h2 className="text-xl mb-4">Enter Master Password</h2>
                         <input
+                            ref={inputRef}
                             type="password"
                             className="form-input border border-pwdm-four rounded-md p-2 w-full text-pwdm-one mb-4"
                             value={masterPassword}
