@@ -37,9 +37,9 @@ public class AppController {
         return ResponseEntity.accepted().body(appService.getAppByName(token, name));
     }
 
-    @PutMapping("/name")
+    @PutMapping("/update")
     public ResponseEntity<ApplicationDTO> updateApp(@RequestBody ApplicationDTO applicationDTO) {
-        return ResponseEntity.accepted().body(appService.updateNameApp(applicationDTO));
+        return ResponseEntity.accepted().body(appService.updateApp(applicationDTO));
     }
 
     @DeleteMapping("/delete")

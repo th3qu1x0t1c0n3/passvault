@@ -51,7 +51,7 @@ function SignUp({setUser}: ISignProps) {
         userService.signUp(creationForm).then(response => {
             setUser(response);
             localStorage.setItem('token', response.token);
-            PwdmanagerServerInstance.defaults.headers.common['Authorization'] = response.token;
+            PwdmanagerServerInstance.defaults.headers.common['Authorization'] = "Bearer " + response.token;
             toast.success("Signed In Successfully!");
 
             navigate('/u/');

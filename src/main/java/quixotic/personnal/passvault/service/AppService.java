@@ -44,9 +44,10 @@ public class AppService {
         return new ApplicationDTO(applicationRepository.findByNameIgnoreCaseAndOwner_Username(name, username).orElseThrow());
     }
 
-    public ApplicationDTO updateNameApp(ApplicationDTO applicationDTO) {
+    public ApplicationDTO updateApp(ApplicationDTO applicationDTO) {
         Application application = applicationRepository.findById(applicationDTO.getId()).orElseThrow();
         application.setName(applicationDTO.getName());
+        application.setUrl(applicationDTO.getUrl());
         return new ApplicationDTO(applicationRepository.save(application));
     }
 

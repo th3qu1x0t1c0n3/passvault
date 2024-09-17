@@ -17,11 +17,13 @@ import java.util.stream.Collectors;
 public class ApplicationDTO {
     private Long id;
     private String name;
+    private String url;
     private List<AccountDTO> accounts;
 
     public ApplicationDTO(Application application) {
         this.id = application.getId();
         this.name = application.getName();
+        this.url = application.getUrl();
         this.accounts = application.getAccounts().stream()
                 .map(AccountDTO::new)
                 .collect(Collectors.toList());
@@ -31,6 +33,7 @@ public class ApplicationDTO {
         return Application.builder()
                 .id(id)
                 .name(name)
+                .url(url)
                 .accounts(accounts != null ? accounts.stream()
                         .map(AccountDTO::toEntity)
                         .collect(Collectors.toList()) : new ArrayList<>())

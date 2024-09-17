@@ -19,6 +19,7 @@ public class Application {
     private Long id;
 
     private String name;
+    private String url;
     @ManyToOne(cascade = CascadeType.PERSIST)
     private User owner;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

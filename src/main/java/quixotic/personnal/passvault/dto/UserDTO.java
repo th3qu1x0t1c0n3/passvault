@@ -28,7 +28,7 @@ public class UserDTO {
     public UserDTO(User user, String token) {
         this.id = user.getId();
         this.username = user.getUsername();
-        this.password = user.getPassword();
+//        this.password = user.getPassword();
         this.role = user.getRole();
         this.token = token;
     }
