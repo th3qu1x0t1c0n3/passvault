@@ -26,7 +26,7 @@ function UpdateAccount() {
     ])
     const accountButton: IButton[] = [
         {
-            text: 'Create account',
+            text: 'Update account',
             type: 'submit'
         },
         {
@@ -38,7 +38,12 @@ function UpdateAccount() {
     useEffect(() => {
         let urlParams = new URLSearchParams(window.location.search);
         let idAccount = urlParams.get('idAccount');
+        const timeStart = Date.now();
         while (idAccount === null) {
+            if (Date.now() - timeStart < 5000) {
+                toast("Account not found, redirecting to home page");
+                navigate('/u/');
+            }
             urlParams = new URLSearchParams(window.location.search);
             idAccount = urlParams.get('idAccount');
         }

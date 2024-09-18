@@ -6,10 +6,7 @@ import {VaultService} from "../../services/VaultService";
 import {toast} from "react-toastify";
 import {IApplication} from "../../assets/models/Vault";
 
-interface ApplicationFormProps {
-    getAllApplications: () => void;
-}
-function ApplicationForm({getAllApplications}: ApplicationFormProps) {
+function ApplicationForm() {
     const vaultService = new VaultService();
     const [appForm, setAppForm] = useState<IApplication>({
         id: 0, name: "", url: "", accounts: []
@@ -32,7 +29,6 @@ function ApplicationForm({getAllApplications}: ApplicationFormProps) {
     function handleSubmit(e: any) {
         e.preventDefault();
         vaultService.createApplication(appForm).then(response => {
-            getAllApplications();
             setAppForm({id: 0, name: "", url: "", accounts: []});
             e.target.reset();
             toast.success("Application created successfully!");

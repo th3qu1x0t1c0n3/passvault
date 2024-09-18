@@ -9,10 +9,9 @@ import Form from "../utils/Form";
 
 interface IAccountFormProps {
     application: IApplication
-    getAllApplications: () => void;
 }
 
-function AccountForm({application, getAllApplications}: IAccountFormProps) {
+function AccountForm({application}: IAccountFormProps) {
     const vaultService = new VaultService();
     const [submitting, setSubmitting] = useState<boolean>(false);
     const [masterPassword, setMasterPassword] = useState<string>("");
@@ -63,7 +62,6 @@ function AccountForm({application, getAllApplications}: IAccountFormProps) {
         const newAccount = {...accountForm, password: encryptedPassword};
 
         vaultService.createAccount(newAccount).then(response => {
-            getAllApplications();
             setAccountForm({applicationId: application.id, email: "", username: "", password: ""});
             toast.success("Account created successfully!");
         }).catch(error => {

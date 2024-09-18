@@ -5,7 +5,6 @@ import {toast} from "react-toastify";
 import AppList from "../Application/AppList";
 import {Route, Routes, useNavigate} from "react-router-dom";
 import PageNotFound from "../utils/PageNotFound";
-import EncryptionDecryption from "../EncryptionDecryption";
 import Button from "../utils/Button";
 import NewRecord from "./NewRecord";
 import UpdateAccount from "./UpdateAccount";
@@ -18,7 +17,7 @@ function Home() {
 
     useEffect(() => {
         getAllApplications()
-    }, []);
+    }, [navigate]);
 
     function getAllApplications() {
         vaultService.getAllApplications().then((response) => {

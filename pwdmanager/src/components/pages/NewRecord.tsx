@@ -30,11 +30,11 @@ function NewRecord({applications, getAllApplications}: INewRecordProps) {
             {
                 selectedApp === null ? (
                     <div>
-                        <ApplicationForm getAllApplications={getAllApplications} />
+                        <ApplicationForm />
                     </div>
                 ) : (
                     <div>
-                        <AccountForm getAllApplications={getAllApplications} application={selectedApp} />
+                        <AccountForm application={selectedApp} />
                     </div>
                 )
             }
