@@ -1,5 +1,8 @@
 import FormInput, {IButton} from "../../assets/models/Form";
 import Button from "./Button";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faEye, faEyeSlash} from "@fortawesome/free-solid-svg-icons";
+import {useState} from "react";
 
 interface IFormInput {
     handleSubmit: (e: any) => void;
@@ -9,6 +12,8 @@ interface IFormInput {
 }
 
 function Form({handleSubmit, handleChange, formInputs, buttons}: IFormInput) {
+    const [showPassword, setShowPassword] = useState(false);
+
     return (
         <div>
             <form onSubmit={handleSubmit} className="h-screen text-center">
@@ -23,12 +28,20 @@ function Form({handleSubmit, handleChange, formInputs, buttons}: IFormInput) {
                                             id={formInfo.name}
                                             onChange={handleChange}
                                             placeholder={formInfo.placeholder}/>
-                                        : <input
-                                            className={`${formInfo.warning !== '' ? "border-red" : "border-gray-300"} form-input border rounded-md p-2 w-full text-pwdm-one`}
-                                            id={formInfo.name}
-                                            onChange={handleChange} type={formInfo.type}
-                                            placeholder={formInfo.placeholder}/>
-
+                                        : <div className={"grid grid-cols-10"}>
+                                            <input
+                                                className={`${formInfo.warning !== '' ? "border-red" : "border-gray-300"} col-span-9 form-input border rounded-md p-2 w-full text-pwdm-one`}
+                                                id={formInfo.name}
+                                                onChange={handleChange}
+                                                type={formInfo.type === 'password' && showPassword ? 'text' : formInfo.type}
+                                                placeholder={formInfo.placeholder}/>
+                                            {
+                                                formInfo.type === 'password' &&
+                                                <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye}
+                                                                 className={"my-auto mx-auto"}
+                                                                 onClick={() => setShowPassword(!showPassword)}/>
+                                            }
+                                        </div>
                                 }
                                 <p>{formInfo.warning}</p>
                             </div>

@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import quixotic.personnal.passvault.dto.AccountDTO;
+import quixotic.personnal.passvault.dto.ApplicationDTO;
 import quixotic.personnal.passvault.service.AccountService;
 
 import java.util.List;
@@ -25,6 +26,12 @@ public class AccountController {
     public ResponseEntity<List<AccountDTO>> getAccountByApplicationId(@PathParam("appId") Long appId) {
         return ResponseEntity.accepted().body(accountService.getAccountByApplicationId(appId));
     }
+
+    @GetMapping("")
+    public ResponseEntity<AccountDTO> getAccountById(@PathParam("id") Long id) {
+        return ResponseEntity.accepted().body(accountService.getAccountById(id));
+    }
+
 
     @PutMapping("/update")
     public ResponseEntity<AccountDTO> updatePassword(@RequestHeader("Authorization") String token, @RequestBody AccountDTO accountDTO) {

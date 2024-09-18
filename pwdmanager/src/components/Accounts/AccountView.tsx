@@ -12,6 +12,11 @@ interface AccountViewProps {
 function AccountView({account, deleteAccount}: AccountViewProps) {
     const navigate = useNavigate();
 
+    function updateAcc(e: any) {
+        e.stopPropagation();
+        navigate('/u/updateAcc?idAccount=' + account.id);
+    }
+
     return (
         <div key={account.id} className="bg-pwdm-one p-3 rounded-lg shadow-lg grid grid-cols-3 gap-1">
             <h1 className="font-semibold">{account.email}</h1>
@@ -20,7 +25,7 @@ function AccountView({account, deleteAccount}: AccountViewProps) {
                 <PasswordView password={account.password}/>
 
                 <div className={"text-right my-auto p-1 px-2"}>
-                    <FontAwesomeIcon className={"mx-2"} onClick={() => navigate('/u/updateApp?idApp=' + account.id)} icon={faSync}/>
+                    <FontAwesomeIcon className={"mx-2"} onClick={updateAcc} icon={faSync}/>
                     <FontAwesomeIcon className={"mx-2"} onClick={() => deleteAccount(account)} icon={faTrash}/>
                 </div>
             </div>

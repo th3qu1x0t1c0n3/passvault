@@ -1,12 +1,11 @@
-import Form from "../utils/Form";
 import {useState} from "react";
 import FormInput, {IButton} from "../../assets/models/Form";
-import {useNavigate} from "react-router-dom";
 import {IAccount, IApplication} from "../../assets/models/Vault";
 import {VaultService} from "../../services/VaultService";
 import {toast} from "react-toastify";
-import {decrypt, encrypt} from "../EncryptionDecryption";
+import {encrypt} from "../EncryptionDecryption";
 import PasswordPopup from "../utils/PasswordPopup";
+import Form from "../utils/Form";
 
 interface IAccountFormProps {
     application: IApplication
@@ -82,7 +81,8 @@ function AccountForm({application, getAllApplications}: IAccountFormProps) {
 
             {
                 submitting &&
-                <PasswordPopup handlePass={handlePass} handleCancel={handleCancel} masterPassword={masterPassword} setMasterPassword={setMasterPassword} />
+                <PasswordPopup handlePass={handlePass} handleCancel={handleCancel} masterPassword={masterPassword}
+                               setMasterPassword={setMasterPassword}/>
             }
         </div>
     );

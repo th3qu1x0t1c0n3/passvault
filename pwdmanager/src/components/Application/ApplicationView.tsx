@@ -104,11 +104,11 @@ function ApplicationView({application, getAllApplications}: ApplicationViewProps
                     <FontAwesomeIcon className={"mx-2"} onClick={handleDelete} icon={faTrash}/>
                 </div>
                 {
-                    open && accounts.length > 0 ? (
+                    open ? (
                         <AccountList accounts={accounts} deleteAccount={deleteAccount}/>
-                    ) : (
+                    ) : application.accounts.length === 0 ? (
                         <h1 className={"text-center text-4xl col-span-full"}>No Accounts</h1>
-                    )
+                    ) : null
                 }
             </div>
 

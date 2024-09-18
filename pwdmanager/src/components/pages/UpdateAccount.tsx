@@ -1,17 +1,19 @@
 import {VaultService} from "../../services/VaultService";
 import {useEffect, useState} from "react";
-import {IAccount, IApplication} from "../../assets/models/Vault";
+import {IAccount} from "../../assets/models/Vault";
 import {toast} from "react-toastify";
 import FormInput, {IButton} from "../../assets/models/Form";
 import {encrypt} from "../EncryptionDecryption";
-import Form from "../utils/Form";
 import PasswordPopup from "../utils/PasswordPopup";
 import {useNavigate} from "react-router-dom";
+import Button from "../utils/Button";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faEye, faEyeSlash} from "@fortawesome/free-solid-svg-icons";
 
 function UpdateAccount() {
     const vaultService = new VaultService();
     const navigate = useNavigate();
-    const [originalAccount, setOriginalAccount] = useState<IApplication | null>(null);
+    const [showPassword, setShowPassword] = useState(false);
     const [submitting, setSubmitting] = useState<boolean>(false);
     const [masterPassword, setMasterPassword] = useState<string>("");
     const [accountForm, setAccountForm] = useState<IAccount>({
@@ -42,7 +44,6 @@ function UpdateAccount() {
         }
 
         vaultService.getAccountById(idAccount as string).then((response) => {
-            setOriginalAccount(response);
             setAccountForm(response);
         }).catch((error) => {
             toast.error(error.response?.data.message);
@@ -86,16 +87,62 @@ function UpdateAccount() {
     }
 
 
+    function getAccountValue(name: string) {
+        if (accountForm !== null) {
+            switch (name) {
+                case 'email':
+                    return accountForm.email;
+                case 'username':
+                    return accountForm.username;
+                case 'password':
+                    return accountForm.password;
+            }
+        }
+        return "";
+    }
+
     return (
         <div>
             <h1>Update Account</h1>
 
-            <Form formInputs={accountFormInfo} handleSubmit={handleSubmit} handleChange={handleChange}
-                  buttons={accountButton}/>
+            <form onSubmit={handleSubmit} className="h-screen text-center">
+                <div className="flex flex-col justify-center items-center mb-3">
+                    {
+                        accountFormInfo.map((formInfo, index) => (
+                            <div key={index} className="my-2 xl:w-1/3 lg:w-1/2 md:w-3/4 w-11/12" id={formInfo.name}>
+                                {
+                                    <div className={"grid grid-cols-10"}>
+                                        <input
+                                            className={`${formInfo.warning !== '' ? "border-red" : "border-gray-300"} col-span-9 form-input border rounded-md p-2 w-full text-pwdm-one`}
+                                            id={formInfo.name}
+                                            value={getAccountValue(formInfo.name)}
+                                            onChange={handleChange} type={formInfo.type === 'password' && showPassword ? 'text' : formInfo.type}
+                                            placeholder={formInfo.placeholder}/>
+                                        {
+                                            formInfo.type === 'password' &&
+                                            <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye}
+                                                             className={"my-auto mx-auto"}
+                                                             onClick={() => setShowPassword(!showPassword)}/>
+                                        }
+                                    </div>
+                                }
+                                <p>{formInfo.warning}</p>
+                            </div>
+                        ))
+                    }
+                </div>
+
+                {
+                    accountButton?.map((button, index) => (
+                        <Button key={index} type={button.type} text={button.text} onClick={button.onClick}/>
+                    ))
+                }
+            </form>
 
             {
                 submitting &&
-                <PasswordPopup handlePass={handlePass} handleCancel={handleCancel} masterPassword={masterPassword} setMasterPassword={setMasterPassword} />
+                <PasswordPopup handlePass={handlePass} handleCancel={handleCancel} masterPassword={masterPassword}
+                               setMasterPassword={setMasterPassword}/>
             }
         </div>
     );
