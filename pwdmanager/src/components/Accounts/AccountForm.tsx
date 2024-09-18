@@ -4,16 +4,21 @@ import FormInput, {IButton} from "../../assets/models/Form";
 import {useNavigate} from "react-router-dom";
 import {IAccount, IApplication} from "../../assets/models/Vault";
 import {VaultService} from "../../services/VaultService";
+import {toast} from "react-toastify";
+import {decrypt, encrypt} from "../EncryptionDecryption";
+import PasswordPopup from "../utils/PasswordPopup";
 
 interface IAccountFormProps {
     application: IApplication
+    getAllApplications: () => void;
 }
 
-function AccountForm({application}: IAccountFormProps) {
-    const navigate = useNavigate();
+function AccountForm({application, getAllApplications}: IAccountFormProps) {
     const vaultService = new VaultService();
+    const [submitting, setSubmitting] = useState<boolean>(false);
+    const [masterPassword, setMasterPassword] = useState<string>("");
     const [accountForm, setAccountForm] = useState<IAccount>({
-        applicationId: application.id, id: 0, email: "", username: "", password: ""
+        applicationId: application.id, email: "", username: "", password: ""
     });
     const [accountFormInfo, setAccountFromInfo] = useState([
         new FormInput('email', 'text', 'email@address.com', ''),
@@ -33,15 +38,12 @@ function AccountForm({application}: IAccountFormProps) {
 
     function handleSubmit(e: any) {
         e.preventDefault();
-        vaultService.createAccount(accountForm).then(response => {
-            navigate('/u/');
-        }).catch(error => {
-            console.log(error);
-        })
+        setSubmitting(true);
+
+        e.target.reset();
     }
 
     function handleChange(e: any) {
-        console.log(e.target.value);
         setAccountFromInfo(accountFormInfo.map((formInfo) => {
             if (formInfo.name === e.target.id)
                 formInfo.warning = '';
@@ -51,12 +53,37 @@ function AccountForm({application}: IAccountFormProps) {
         setAccountForm({...accountForm, [e.target.id]: e.target.value})
     }
 
+    function handleCancel() {
+        setMasterPassword("");
+        setSubmitting(false);
+    }
+
+    function handlePass() {
+        const encryptedPassword = encrypt(masterPassword, accountForm.password);
+        setSubmitting(false);
+        const newAccount = {...accountForm, password: encryptedPassword};
+
+        vaultService.createAccount(newAccount).then(response => {
+            getAllApplications();
+            setAccountForm({applicationId: application.id, email: "", username: "", password: ""});
+            toast.success("Account created successfully!");
+        }).catch(error => {
+            toast.error(error.response?.data.message);
+        })
+    }
+
+
     return (
         <div>
             <h1>Account Form</h1>
 
             <Form formInputs={accountFormInfo} handleSubmit={handleSubmit} handleChange={handleChange}
                   buttons={accountButton}/>
+
+            {
+                submitting &&
+                <PasswordPopup handlePass={handlePass} handleCancel={handleCancel} masterPassword={masterPassword} setMasterPassword={setMasterPassword} />
+            }
         </div>
     );
 }

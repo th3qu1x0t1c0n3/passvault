@@ -5,7 +5,7 @@ export interface IApplication{
     accounts: IAccount[];
 }
 export interface IAccount {
-    id: number;
+    id?: number;
     applicationId: number;
     email: string;
     username: string;

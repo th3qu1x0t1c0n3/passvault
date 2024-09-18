@@ -1,69 +1,31 @@
-import { useState } from "react";
-import { toast } from "react-toastify";
-import CryptoJS from "crypto-js";
-import {decrypt} from "../EncryptionDecryption";
+import Button from "./Button";
+import React, {RefObject} from "react";
 
-function PasswordPopup({ password }: { password: string }) {
-    const [showPassword, setShowPassword] = useState(false);
-    const [isPopupOpen, setIsPopupOpen] = useState(false);
-    const [masterPassword, setMasterPassword] = useState("");
-
-    function pwToShow() {
-        if (showPassword) {
-            return password;
-        } else {
-            return "*".repeat(Math.min(10, password.length));
-        }
-    }
-
-    function copyToClipboard() {
-        navigator.clipboard.writeText(password).then(() => {
-            toast.success("Password copied to clipboard!");
-        }).catch(err => {
-            toast.error("Failed to copy password: " + err);
-        });
-    }
-
-    function handleShowPassword() {
-        setIsPopupOpen(true);
-    }
-
-    function handleDecrypt() {
-        try {
-            const decryptedPassword = decrypt(masterPassword, password);
-            setShowPassword(true);
-            setIsPopupOpen(false);
-            toast.success("Password decrypted successfully!");
-        } catch (error) {
-            toast.error("Failed to decrypt password: " + error);
-        }
-    }
+interface IPasswordPopup {
+    inputRef?: RefObject<HTMLInputElement>;
+    masterPassword: string;
+    setMasterPassword: (password: string) => void;
+    handlePass: () => void;
+    handleCancel: () => void;
+}
+function PasswordPopup({inputRef, masterPassword, setMasterPassword, handlePass, handleCancel}: IPasswordPopup) {
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-            <div className="bg-white p-6 rounded-lg shadow-lg">
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
+            <form className="bg-pwdm-one p-6 rounded-lg shadow-lg">
                 <h2 className="text-xl mb-4">Enter Master Password</h2>
                 <input
+                    ref={inputRef}
                     type="password"
-                    className="border border-gray-300 p-2 w-full mb-4"
+                    className="form-input border border-pwdm-four rounded-md p-2 w-full text-pwdm-one mb-4"
                     value={masterPassword}
                     onChange={(e) => setMasterPassword(e.target.value)}
                 />
                 <div className="flex justify-end">
-                    <button
-                        className="bg-blue-500 text-white px-4 py-2 rounded mr-2"
-                        onClick={handleDecrypt}
-                    >
-                        Decrypt
-                    </button>
-                    <button
-                        className="bg-gray-500 text-white px-4 py-2 rounded"
-                        onClick={() => setIsPopupOpen(false)}
-                    >
-                        Cancel
-                    </button>
+                    <Button type={"button"} text={"Decrypt"} onClick={handlePass}/>
+                    <Button type={"button"} text={"Cancel"} onClick={handleCancel}/>
                 </div>
-            </div>
+            </form>
         </div>
     );
 }

@@ -55,7 +55,6 @@ function SignIn({setUser}: ISignProps) {
             navigate('/u/');
         }).catch(error => {
             toast.error(error.response?.data.message);
-            console.log(error);
         })
     }
 
