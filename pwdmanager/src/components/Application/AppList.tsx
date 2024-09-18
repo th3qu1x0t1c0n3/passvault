@@ -4,8 +4,9 @@ import ApplicationView from "./ApplicationView";
 
 interface AppListProps {
     applications: IApplication[];
+    getAllApplications: () => void;
 }
-function AppList({applications}: AppListProps) {
+function AppList({applications, getAllApplications}: AppListProps) {
 
     return (
         <div>
@@ -14,7 +15,7 @@ function AppList({applications}: AppListProps) {
                 {
                     applications.map((application, index) => {
                         return (
-                            <ApplicationView key={index} application={application}/>
+                            <ApplicationView key={index} application={application} getAllApplications={getAllApplications}/>
                         )
                     })
                 }

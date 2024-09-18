@@ -23,7 +23,7 @@ function PasswordView({password}: { password: string }) {
     }
     
     return (
-        <div className={"grid-cols-2 grid gap-1 text-right"}>
+        <div className={"grid-cols-2 grid gap-1 text-right col-span-3"}>
             <h1 className={`rounded-md p-1 w-full text-pwdm-four mx-auto`}>{pwToShow()}</h1>
             <div className={"text-left"}>
                 <FontAwesomeIcon className={"text-pwdm-four clickable p-2 my-auto"}

@@ -23,7 +23,7 @@ export class VaultService{
             return response.data;
         });
     }
-    async deleteApplication(appId: string) {
+    async deleteApplication(appId: number) {
         return PwdmanagerServerInstance.delete(`/apps/delete?id=${appId}`).then((response) => {
             return response.data;
         });
@@ -44,7 +44,7 @@ export class VaultService{
             return response.data;
         });
     }
-    async deleteAccount(appId: string, accountId: string) {
+    async deleteAccount(accountId: number) {
         return PwdmanagerServerInstance.delete(`/account/delete?id=${accountId}`).then((response) => {
             return response.data;
         });

@@ -8,6 +8,7 @@ import Home from "./Home";
 import Header from "../utils/Header";
 import {PwdmanagerServerInstance} from "../../App";
 import {UserService} from "../../services/UserService";
+import {toast} from "react-toastify";
 
 function Main() {
     const navigate = useNavigate();
@@ -15,20 +16,24 @@ function Main() {
     const [user, setUser] = useState<IUser | null>(null);
 
     useEffect(() => {
-        const token = sessionStorage.getItem('token');
-        if (token && user === null) {
+        const token = localStorage.getItem('token');
+
+        if (token) {
+            PwdmanagerServerInstance.defaults.headers.common['Authorization'] = "Bearer " + token;
+
             userService.getMe().then(response => {
                 setUser(response);
-                PwdmanagerServerInstance.defaults.headers.common['Authorization'] = "Bearer " + token;
+                navigate("/u/");
+            }).catch(error => {
+                toast.error(error.response?.data.message);
             })
+        } else {
+            setUser(null);
+            localStorage.removeItem('token');
+            PwdmanagerServerInstance.defaults.headers.common['Authorization'] = '';
+            navigate("/");
         }
-        // if (token === undefined || token === null) {
-        //     setUser(null);
-        //     localStorage.removeItem('token');
-        //     PwdmanagerServerInstance.defaults.headers.common['Authorization'] = '';
-        //     navigate("/");
-        // }
-    }, [user]);
+    }, []);
 
 
     return (

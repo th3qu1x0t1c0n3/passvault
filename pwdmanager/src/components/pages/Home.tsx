@@ -20,7 +20,6 @@ function Home() {
 
     function getAllApplications() {
         vaultService.getAllApplications().then((response) => {
-            console.log(response);
             setApplications(response);
         }).catch((error) => {
             toast.error(error.response?.data.message);
@@ -30,11 +29,14 @@ function Home() {
     return (
         <div>
             <div className={"grid grid-cols-2 gap-2 w-1/4 mx-auto mt-4"}>
-                <Button text={"Home"} type={"button"} onClick={() => navigate('/u/')} />
+                <Button text={"Home"} type={"button"} onClick={() => {
+                    getAllApplications();
+                    navigate('/u/');
+                }} />
                 <Button text={"New Record"} type={"button"} onClick={() => navigate('/u/new')} />
             </div>
             <Routes>
-                <Route path={"/"} element={<AppList applications={applications} />} />
+                <Route path={"/"} element={<AppList applications={applications} getAllApplications={getAllApplications}/>} />
                 <Route path={"/new"} element={<NewRecord getAllApplications={getAllApplications} applications={applications} />} />
                 <Route path={"/ende"} element={<EncryptionDecryption />} />
                 <Route path="*" element={<PageNotFound/>}/>
