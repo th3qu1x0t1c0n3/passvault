@@ -34,8 +34,13 @@ export class VaultService{
             return response.data;
         });
     }
-    async getAccount() {
-        return PwdmanagerServerInstance.get(`/account/all`).then((response) => {
+    async getAccountsByApplication(appId: string) {
+        return PwdmanagerServerInstance.get(`/account/all?id=${appId}`).then((response) => {
+            return response.data;
+        });
+    }
+    async getAccountById(accId: string) {
+        return PwdmanagerServerInstance.get(`/account?id=${accId}`).then((response) => {
             return response.data;
         });
     }

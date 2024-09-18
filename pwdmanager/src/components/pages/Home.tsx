@@ -8,6 +8,8 @@ import PageNotFound from "../utils/PageNotFound";
 import EncryptionDecryption from "../EncryptionDecryption";
 import Button from "../utils/Button";
 import NewRecord from "./NewRecord";
+import UpdateAccount from "./UpdateAccount";
+import UpdateApp from "./UpdateApp";
 
 function Home() {
     const vaultService = new VaultService();
@@ -38,7 +40,9 @@ function Home() {
             <Routes>
                 <Route path={"/"} element={<AppList applications={applications} getAllApplications={getAllApplications}/>} />
                 <Route path={"/new"} element={<NewRecord getAllApplications={getAllApplications} applications={applications} />} />
-                <Route path={"/ende"} element={<EncryptionDecryption />} />
+                {/*<Route path={"/updateApp"} element={<EncryptionDecryption />} />*/}
+                <Route path={"/updateApp"} element={<UpdateApp />} />
+                <Route path={"/updateAcc"} element={<UpdateAccount />} />
                 <Route path="*" element={<PageNotFound/>}/>
             </Routes>
         </div>

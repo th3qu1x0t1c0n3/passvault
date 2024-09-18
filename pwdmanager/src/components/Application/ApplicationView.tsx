@@ -1,12 +1,13 @@
 import {IAccount, IApplication} from "../../assets/models/Vault";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faArrowUpRightFromSquare, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {faArrowUpRightFromSquare, faSync, faTrash} from "@fortawesome/free-solid-svg-icons";
 import AccountList from "../Accounts/AccountList";
 import {useEffect, useRef, useState} from "react";
 import {toast} from "react-toastify";
 import {decrypt} from "../EncryptionDecryption";
 import PasswordPopup from "../utils/PasswordPopup";
 import {VaultService} from "../../services/VaultService";
+import {useNavigate} from "react-router-dom";
 
 interface ApplicationViewProps {
     application: IApplication;
@@ -15,6 +16,7 @@ interface ApplicationViewProps {
 
 function ApplicationView({application, getAllApplications}: ApplicationViewProps) {
     const vaultService = new VaultService();
+    const navigate = useNavigate();
     const [open, setOpen] = useState<boolean>(false);
     const [showPopup, setShowPopup] = useState<boolean>(false);
     const [masterPassword, setMasterPassword] = useState<string>("");
@@ -98,7 +100,8 @@ function ApplicationView({application, getAllApplications}: ApplicationViewProps
                                      icon={faArrowUpRightFromSquare}/>
                 </h1>
                 <div className={"text-end my-auto p-1 px-2"}>
-                    <FontAwesomeIcon onClick={handleDelete} icon={faTrash}/>
+                    <FontAwesomeIcon className={"mx-2"} onClick={() => navigate('/u/updateApp?idApp=' + application.id)} icon={faSync}/>
+                    <FontAwesomeIcon className={"mx-2"} onClick={handleDelete} icon={faTrash}/>
                 </div>
                 {
                     open && accounts.length > 0 ? (

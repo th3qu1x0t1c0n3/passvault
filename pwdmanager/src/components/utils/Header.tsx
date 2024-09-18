@@ -19,7 +19,7 @@ function Header({user, setUser}: IHeaderProps) {
     }
 
     return (
-        <div className="flex justify-between items-center p-4 bg-pwdm-two font-semibold">
+        <div className="grid grid-cols-3 p-4 bg-pwdm-two font-semibold text-justify">
             <div onClick={() => user === null ? navigate("/") : navigate("/u/")}>
                 <h1 className="text-2xl font-bold clickable inline-block ms-2">Password Manager</h1>
             </div>
@@ -29,7 +29,7 @@ function Header({user, setUser}: IHeaderProps) {
                     <div className="flex justify-center">
                         <h1 className={"text-4xl"}>Welcome {user.username}</h1>
                     </div>
-                    <div>
+                    <div className={"text-right"}>
                         <Button text={"Disconnect"} type={"button"} onClick={disconnect} />
                     </div>
                 </>
