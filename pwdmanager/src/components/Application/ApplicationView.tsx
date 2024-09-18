@@ -37,7 +37,8 @@ function ApplicationView({application, getAllApplications}: ApplicationViewProps
         }
     }, [showPopup]);
 
-    function handleNavigate(url: string) {
+    function handleNavigate(url: string, e: any) {
+        e.stopPropagation();
         if (url && url.includes("http")) {
             window.open(url, "_blank");
         } else {
@@ -96,7 +97,7 @@ function ApplicationView({application, getAllApplications}: ApplicationViewProps
                 <h1 className="text-center my-auto">
                     <span className={"mx-2"}>{application.url}</span>
                     <FontAwesomeIcon className={"clickable"}
-                                     onClick={() => handleNavigate(application.url)}
+                                     onClick={(event) => handleNavigate(application.url, event)}
                                      icon={faArrowUpRightFromSquare}/>
                 </h1>
                 <div className={"text-end my-auto p-1 px-2"}>
