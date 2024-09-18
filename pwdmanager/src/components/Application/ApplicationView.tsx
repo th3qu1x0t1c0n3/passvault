@@ -43,7 +43,8 @@ function ApplicationView({application}: ApplicationViewProps) {
     function handleDecrypt() {
         try {
             application.accounts.map((account) => {
-                return setAccounts([...accounts, {...account, password: decrypt(masterPassword, account.password)}]);
+                console.log(accounts);
+                accounts.push({...account, password: decrypt(masterPassword, account.password)});
             })
             setMasterPassword("");
             setShowPopup(false);

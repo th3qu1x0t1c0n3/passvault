@@ -1,6 +1,5 @@
 import {IAccount} from "../../assets/models/Vault";
 import AccountView from "./AccountView";
-import {useEffect, useState} from "react";
 
 interface AccountListProps {
     accounts: IAccount[];
@@ -26,7 +25,9 @@ function AccountList({accounts}: AccountListProps) {
                 {
                     accounts.map((account, index) => {
                         return (
-                            <AccountView key={index} account={account}/>
+                            <div key={index}>
+                                <AccountView account={account}/>
+                            </div>
                         )
                     })
                 }

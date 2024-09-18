@@ -20,6 +20,7 @@ function Home() {
 
     function getAllApplications() {
         vaultService.getAllApplications().then((response) => {
+            console.log(response);
             setApplications(response);
         }).catch((error) => {
             toast.error(error.response?.data.message);
