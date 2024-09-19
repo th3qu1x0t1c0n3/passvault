@@ -1,4 +1,3 @@
-import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import FormInput, {IButton} from "../../assets/models/Form";
 import Form from "../utils/Form";
@@ -6,7 +5,10 @@ import {VaultService} from "../../services/VaultService";
 import {toast} from "react-toastify";
 import {IApplication} from "../../assets/models/Vault";
 
-function ApplicationForm() {
+interface IApplicationFormProps {
+    getAllApplications: () => void;
+}
+function ApplicationForm({getAllApplications}: IApplicationFormProps) {
     const vaultService = new VaultService();
     const [appForm, setAppForm] = useState<IApplication>({
         id: 0, name: "", url: "", accounts: []
@@ -32,6 +34,7 @@ function ApplicationForm() {
             setAppForm({id: 0, name: "", url: "", accounts: []});
             e.target.reset();
             toast.success("Application created successfully!");
+            getAllApplications();
         }).catch(error => {
             toast.error(error.response?.data.message);
         })
@@ -50,7 +53,6 @@ function ApplicationForm() {
     return (
         <div>
             <h1>Application Form</h1>
-
             <Form formInputs={appFormInfo} handleSubmit={handleSubmit} handleChange={handleChange} buttons={appButton}/>
         </div>
     )

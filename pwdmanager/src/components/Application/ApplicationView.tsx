@@ -8,14 +8,18 @@ import {decrypt} from "../EncryptionDecryption";
 import PasswordPopup from "../utils/PasswordPopup";
 import {VaultService} from "../../services/VaultService";
 import {useNavigate} from "react-router-dom";
+import {IsignIn, IUser} from "../../assets/models/Authentication";
+import {UserService} from "../../services/UserService";
 
 interface ApplicationViewProps {
     application: IApplication;
     getAllApplications: () => void;
+    user: IUser
 }
 
-function ApplicationView({application, getAllApplications}: ApplicationViewProps) {
+function ApplicationView({application, getAllApplications, user}: ApplicationViewProps) {
     const vaultService = new VaultService();
+    const userServices = new UserService();
     const navigate = useNavigate();
     const [open, setOpen] = useState<boolean>(false);
     const [showPopup, setShowPopup] = useState<boolean>(false);
@@ -47,15 +51,17 @@ function ApplicationView({application, getAllApplications}: ApplicationViewProps
     }
 
     function handleDecrypt() {
-        try {
+        setMasterPassword("");
+        setShowPopup(false);
+
+        const signIn: IsignIn = {username: user.username, password: masterPassword};
+        userServices.signIn(signIn).then((response) => {
             application.accounts.map((account) => {
                 accounts.push({...account, password: decrypt(masterPassword, account.password)});
             })
-            setMasterPassword("");
-            setShowPopup(false);
-        } catch (error) {
-            toast.error("Failed to decrypt password: " + error);
-        }
+        }).catch((error) => {
+            toast.error(error.response?.data.message);
+        })
     }
 
     function handleCancel() {

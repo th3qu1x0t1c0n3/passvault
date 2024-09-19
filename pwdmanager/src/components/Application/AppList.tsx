@@ -1,12 +1,14 @@
 import {IApplication} from "../../assets/models/Vault";
 import ApplicationView from "./ApplicationView";
+import {IUser} from "../../assets/models/Authentication";
 
 
 interface AppListProps {
     applications: IApplication[];
     getAllApplications: () => void;
+    user: IUser;
 }
-function AppList({applications, getAllApplications}: AppListProps) {
+function AppList({applications, getAllApplications, user}: AppListProps) {
 
     return (
         <div>
@@ -15,7 +17,7 @@ function AppList({applications, getAllApplications}: AppListProps) {
                 {
                     applications.map((application, index) => {
                         return (
-                            <ApplicationView key={index} application={application} getAllApplications={getAllApplications}/>
+                            <ApplicationView key={index} application={application} getAllApplications={getAllApplications} user={user}/>
                         )
                     })
                 }

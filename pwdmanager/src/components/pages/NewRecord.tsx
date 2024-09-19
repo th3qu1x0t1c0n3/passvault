@@ -2,13 +2,15 @@ import React, {useState} from 'react';
 import {IAccount, IApplication} from "../../assets/models/Vault";
 import ApplicationForm from "../Application/ApplicationForm";
 import AccountForm from "../Accounts/AccountForm";
+import {IUser} from "../../assets/models/Authentication";
 
 interface INewRecordProps {
     applications: IApplication[];
     getAllApplications: () => void;
+    user: IUser;
 }
 
-function NewRecord({applications, getAllApplications}: INewRecordProps) {
+function NewRecord({applications, getAllApplications, user}: INewRecordProps) {
     const [selectedApp, setSelectedApp] = useState<IApplication | null>(null);
 
     function handleSelected(e: any) {
@@ -30,11 +32,11 @@ function NewRecord({applications, getAllApplications}: INewRecordProps) {
             {
                 selectedApp === null ? (
                     <div>
-                        <ApplicationForm />
+                        <ApplicationForm getAllApplications={getAllApplications} />
                     </div>
                 ) : (
                     <div>
-                        <AccountForm application={selectedApp} />
+                        <AccountForm application={selectedApp} user={user} />
                     </div>
                 )
             }

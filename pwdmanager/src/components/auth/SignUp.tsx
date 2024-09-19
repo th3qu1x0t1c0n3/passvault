@@ -16,7 +16,7 @@ function SignUp({setUser}: ISignProps) {
         confirmPassword: ''
     });
     const [createFormInfo, setCreateFromInfo] = useState([
-        new FormInput('username', 'text', 'Email', ''),
+        new FormInput('username', 'text', 'Username', ''),
         new FormInput('password', 'password', 'Password', ''),
         new FormInput('confirmPassword', 'password', 'Confirm Password', '')
     ])

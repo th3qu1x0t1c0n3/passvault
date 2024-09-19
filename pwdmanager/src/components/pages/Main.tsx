@@ -45,7 +45,7 @@ function Main() {
                     <div className="w-11/12 mx-auto">
                         <Routes>
                             <Route path="/" element={<SignUp setUser={setUser} />}/>
-                            <Route path="/u/*" element={<Home />}/>
+                            {user && <Route path="/u/*" element={<Home user={user}/>}/>}
                             <Route path="/signin" element={<SignIn setUser={setUser} />}/>
                             <Route path="/signup" element={<SignUp setUser={setUser} />}/>
 

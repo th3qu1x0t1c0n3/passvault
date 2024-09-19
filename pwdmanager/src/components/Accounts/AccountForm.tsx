@@ -6,14 +6,19 @@ import {toast} from "react-toastify";
 import {encrypt} from "../EncryptionDecryption";
 import PasswordPopup from "../utils/PasswordPopup";
 import Form from "../utils/Form";
+import {UserService} from "../../services/UserService";
+import {IsignIn, IUser} from "../../assets/models/Authentication";
 
 interface IAccountFormProps {
     application: IApplication
+    user: IUser
 }
 
-function AccountForm({application}: IAccountFormProps) {
+function AccountForm({application, user}: IAccountFormProps) {
     const vaultService = new VaultService();
+    const userService = new UserService();
     const [submitting, setSubmitting] = useState<boolean>(false);
+    const [event, setEvent] = useState<any>();
     const [masterPassword, setMasterPassword] = useState<string>("");
     const [accountForm, setAccountForm] = useState<IAccount>({
         applicationId: application.id, email: "", username: "", password: ""
@@ -37,8 +42,7 @@ function AccountForm({application}: IAccountFormProps) {
     function handleSubmit(e: any) {
         e.preventDefault();
         setSubmitting(true);
-
-        e.target.reset();
+        setEvent(e);
     }
 
     function handleChange(e: any) {
@@ -57,13 +61,22 @@ function AccountForm({application}: IAccountFormProps) {
     }
 
     function handlePass() {
-        const encryptedPassword = encrypt(masterPassword, accountForm.password);
+        setMasterPassword("");
         setSubmitting(false);
-        const newAccount = {...accountForm, password: encryptedPassword};
 
-        vaultService.createAccount(newAccount).then(response => {
-            setAccountForm({applicationId: application.id, email: "", username: "", password: ""});
-            toast.success("Account created successfully!");
+        const signIn: IsignIn = {username: user.username, password: masterPassword};
+
+        userService.signIn(signIn).then(response => {
+            const encryptedPassword = encrypt(masterPassword, accountForm.password);
+            const newAccount = {...accountForm, password: encryptedPassword};
+
+            vaultService.createAccount(newAccount).then(response => {
+                setAccountForm({applicationId: application.id, email: "", username: "", password: ""});
+                event.target.reset();
+                toast.success("Account created successfully!");
+            }).catch(error => {
+                toast.error(error.response?.data.message);
+            })
         }).catch(error => {
             toast.error(error.response?.data.message);
         })

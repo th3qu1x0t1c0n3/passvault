@@ -1,4 +1,4 @@
-import {IAccount, IApplication} from "../../assets/models/Vault";
+import {IApplication} from "../../assets/models/Vault";
 import React, {useEffect, useState} from "react";
 import {VaultService} from "../../services/VaultService";
 import {toast} from "react-toastify";
@@ -9,8 +9,12 @@ import Button from "../utils/Button";
 import NewRecord from "./NewRecord";
 import UpdateAccount from "./UpdateAccount";
 import UpdateApp from "./UpdateApp";
+import {IUser} from "../../assets/models/Authentication";
 
-function Home() {
+interface IHomeProps {
+    user: IUser;
+}
+function Home({user}: IHomeProps) {
     const vaultService = new VaultService();
     const navigate = useNavigate();
     const [applications, setApplications] = useState<IApplication[]>([]);
@@ -37,11 +41,11 @@ function Home() {
                 <Button text={"New Record"} type={"button"} onClick={() => navigate('/u/new')} />
             </div>
             <Routes>
-                <Route path={"/"} element={<AppList applications={applications} getAllApplications={getAllApplications}/>} />
-                <Route path={"/new"} element={<NewRecord getAllApplications={getAllApplications} applications={applications} />} />
+                <Route path={"/"} element={<AppList applications={applications} getAllApplications={getAllApplications} user={user}/>} />
+                <Route path={"/new"} element={<NewRecord getAllApplications={getAllApplications} applications={applications} user={user} />} />
                 {/*<Route path={"/updateApp"} element={<EncryptionDecryption />} />*/}
                 <Route path={"/updateApp"} element={<UpdateApp />} />
-                <Route path={"/updateAcc"} element={<UpdateAccount />} />
+                <Route path={"/updateAcc"} element={<UpdateAccount user={user} />} />
                 <Route path="*" element={<PageNotFound/>}/>
             </Routes>
         </div>

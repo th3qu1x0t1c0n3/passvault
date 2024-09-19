@@ -15,7 +15,7 @@ function SignIn({setUser}: ISignProps) {
         password: '',
     });
     const [signinFormInfo, setSigninFromInfo] = useState([
-        new FormInput('username', 'text', 'Email', ''),
+        new FormInput('username', 'text', 'Username', ''),
         new FormInput('password', 'password', 'Password', ''),
     ])
     const signinButton: IButton[] = [

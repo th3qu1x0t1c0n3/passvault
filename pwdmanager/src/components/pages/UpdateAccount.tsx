@@ -9,9 +9,15 @@ import {useNavigate} from "react-router-dom";
 import Button from "../utils/Button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEye, faEyeSlash} from "@fortawesome/free-solid-svg-icons";
+import {IsignIn, IUser} from "../../assets/models/Authentication";
+import {UserService} from "../../services/UserService";
 
-function UpdateAccount() {
+interface IAccountFormProps {
+    user: IUser;
+}
+function UpdateAccount({user}: IAccountFormProps) {
     const vaultService = new VaultService();
+    const userService = new UserService();
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const [submitting, setSubmitting] = useState<boolean>(false);
@@ -79,13 +85,19 @@ function UpdateAccount() {
     }
 
     function handlePass() {
-        const encryptedPassword = encrypt(masterPassword, accountForm.password);
         setSubmitting(false);
-        const newAccount = {...accountForm, password: encryptedPassword};
+        const signIn: IsignIn = {username: user.username, password: masterPassword};
 
-        vaultService.updateAccount(newAccount).then(response => {
-            navigate('/u/');
-            toast.success("Account Updated successfully!");
+        userService.signIn(signIn).then(response => {
+            const encryptedPassword = encrypt(masterPassword, accountForm.password);
+            const newAccount = {...accountForm, password: encryptedPassword};
+
+            vaultService.updateAccount(newAccount).then(response => {
+                navigate('/u/');
+                toast.success("Account Updated successfully!");
+            }).catch(error => {
+                toast.error(error.response?.data.message);
+            })
         }).catch(error => {
             toast.error(error.response?.data.message);
         })
