@@ -61,9 +61,7 @@ function AccountForm({application, user}: IAccountFormProps) {
     }
 
     function handlePass() {
-        setMasterPassword("");
         setSubmitting(false);
-
         const signIn: IsignIn = {username: user.username, password: masterPassword};
 
         userService.signIn(signIn).then(response => {
@@ -80,6 +78,8 @@ function AccountForm({application, user}: IAccountFormProps) {
         }).catch(error => {
             toast.error(error.response?.data.message);
         })
+
+        setMasterPassword("");
     }
 
 

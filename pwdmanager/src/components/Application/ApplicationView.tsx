@@ -51,7 +51,6 @@ function ApplicationView({application, getAllApplications, user}: ApplicationVie
     }
 
     function handleDecrypt() {
-        setMasterPassword("");
         setShowPopup(false);
 
         const signIn: IsignIn = {username: user.username, password: masterPassword};
@@ -62,6 +61,7 @@ function ApplicationView({application, getAllApplications, user}: ApplicationVie
         }).catch((error) => {
             toast.error(error.response?.data.message);
         })
+        setMasterPassword("");
     }
 
     function handleCancel() {

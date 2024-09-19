@@ -101,6 +101,7 @@ function UpdateAccount({user}: IAccountFormProps) {
         }).catch(error => {
             toast.error(error.response?.data.message);
         })
+        setMasterPassword("");
     }
 
 
