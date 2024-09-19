@@ -20,7 +20,7 @@ function PasswordPopup({inputRef, masterPassword, setMasterPassword, handlePass,
                 <div className={"grid grid-cols-10"}>
                     <input
                         ref={inputRef}
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         className="form-input border border-pwdm-four rounded-md p-2 col-span-9 text-pwdm-one mb-4"
                         value={masterPassword}
                         onChange={(e) => setMasterPassword(e.target.value)}
