@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import FormInput, {IButton} from "../../assets/models/Form";
 import {IAccount, IApplication} from "../../assets/models/Vault";
 import {VaultService} from "../../services/VaultService";
@@ -38,6 +38,10 @@ function AccountForm({application, user}: IAccountFormProps) {
             type: 'reset'
         }
     ]
+
+    useEffect(() => {
+        setAccountForm({...accountForm, applicationId: application.id});
+    }, [application]);
 
     function handleSubmit(e: any) {
         e.preventDefault();

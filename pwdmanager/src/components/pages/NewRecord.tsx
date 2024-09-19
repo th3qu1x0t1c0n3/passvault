@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {IAccount, IApplication} from "../../assets/models/Vault";
 import ApplicationForm from "../Application/ApplicationForm";
 import AccountForm from "../Accounts/AccountForm";
@@ -14,11 +14,10 @@ interface INewRecordProps {
 function NewRecord({applications, getAllApplications, user}: INewRecordProps) {
     const [selectedApp, setSelectedApp] = useState<IApplication | null>(null);
 
-    function handleSelected(e: any) {
+    function handleSelected(e: React.ChangeEvent<HTMLSelectElement>) {
         setSelectedApp(applications.find(app => app.id === parseInt(e.target.value)) || null);
-        toast("Selected: " + selectedApp?.name);
     }
-    // TODO: Change the onCHange to get the correct APP
+
     return (
         <div>
             <h1 className={"text-4xl mt-2"}>New Record</h1>
