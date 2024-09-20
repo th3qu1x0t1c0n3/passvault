@@ -1,5 +1,10 @@
 # PassVault
 
+## Deployment
+1. Change spring properties 
+2. Check if CMD is working
+3. Change React URL 
+
 ## Overview
 PassVault is a secure and efficient password manager built using Java and Spring Boot. It allows users to store, manage, and retrieve their passwords securely.
 
