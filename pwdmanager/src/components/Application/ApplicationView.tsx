@@ -53,11 +53,13 @@ function ApplicationView({application, getAllApplications, user}: ApplicationVie
     function handleDecrypt() {
         setShowPopup(false);
 
+        const tempAccounts: IAccount[] = [];
         const signIn: IsignIn = {username: user.username, password: masterPassword};
         userServices.signIn(signIn).then((response) => {
             application.accounts.map((account) => {
-                accounts.push({...account, password: decrypt(masterPassword, account.password)});
+                tempAccounts.push({...account, password: decrypt(masterPassword, account.password)});
             })
+            setAccounts(tempAccounts);
         }).catch((error) => {
             toast.error(error.response?.data.message);
         })
