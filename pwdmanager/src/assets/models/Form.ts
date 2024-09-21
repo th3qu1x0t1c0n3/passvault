@@ -5,6 +5,14 @@ export interface IFormInput {
     warning: string;
 }
 
+export interface IFilters {
+    name: string;
+    url: string;
+    email: string;
+    username: string;
+}
+
+
 export interface IButton {
     type: "submit" | "reset" | "button" | undefined;
     text: string;

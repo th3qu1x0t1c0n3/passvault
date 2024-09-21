@@ -20,7 +20,7 @@ public class PassvaultApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) {
-//		createUser();
+		createUser();
 	}
 
 	private void createUser() {
