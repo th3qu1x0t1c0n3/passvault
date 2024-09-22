@@ -22,7 +22,7 @@ function Footer() {
 
                 </div>
                 <div className={"text-center"}>
-                    <ul className={"ms-20"}>
+                    <ul className={""}>
                         <li className={""}>
                             <a className={"clickable"} href="https://www.paypal.com/paypalme/QuixoticQC" target="_blank">Paypal
                                 <FontAwesomeIcon className={"ms-2"} icon={faArrowUpRightFromSquare}/>
