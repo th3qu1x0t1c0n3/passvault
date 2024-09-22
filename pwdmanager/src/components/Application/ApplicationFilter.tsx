@@ -16,9 +16,9 @@ function ApplicationFilter({filters, setFilters}: IFiltersProps) {
     };
 
     return (
-        <div className="grid grid-cols-4 gap-0 text-center w-4/5 mx-auto">
+        <div className="grid grid-cols-4 gap-1 text-center w-3/5 mx-auto">
             <div>
-                <label className={"mx-2"}>Name</label>
+                <label className={"mx-2 block"}>Name</label>
                 <input
                     type="text"
                     name="name"
@@ -28,7 +28,7 @@ function ApplicationFilter({filters, setFilters}: IFiltersProps) {
                 />
             </div>
             <div>
-                <label className={"mx-2"}>URL</label>
+                <label className={"mx-2 block"}>URL</label>
                 <input
                     type="text"
                     name="url"
@@ -38,7 +38,7 @@ function ApplicationFilter({filters, setFilters}: IFiltersProps) {
                 />
             </div>
             <div>
-                <label className={"mx-2"}>Email</label>
+                <label className={"mx-2 block"}>Email</label>
                 <input
                     type="text"
                     name="email"
@@ -48,7 +48,7 @@ function ApplicationFilter({filters, setFilters}: IFiltersProps) {
                 />
             </div>
             <div>
-                <label className={"mx-2"}>Username</label>
+                <label className={"mx-2 block"}>Username</label>
                 <input
                     type="text"
                     name="username"

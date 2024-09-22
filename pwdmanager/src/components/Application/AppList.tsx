@@ -40,10 +40,21 @@ function AppList({applications, getAllApplications, user}: AppListProps) {
     return (
         <div>
             <h1 className={"text-4xl my-3"}>Applications</h1>
-            <div className={"mx-auto"}>
-                <ApplicationFilter filters={filters} setFilters={setFilters}/>
-            </div>
-            <FilterObjectList filters={filters} items={applications} renderItem={renderApplications}/>
+            {
+                applications.length === 0 ? (
+                    <div>
+                        <h1 className={"text-3xl"}>No Applications Found!</h1>
+                        <h1 className={"text-2xl"}>Please add an application</h1>
+                    </div>
+                    ) : (
+                    <>
+                        <div className={"mx-auto"}>
+                            <ApplicationFilter filters={filters} setFilters={setFilters}/>
+                        </div>
+                        <FilterObjectList filters={filters} items={applications} renderItem={renderApplications}/>
+                    </>
+                )
+            }
         </div>
     )
 }

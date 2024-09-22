@@ -26,6 +26,10 @@ function FilterObjectList({items, renderItem, filters}: IFilterObjectList) {
                         }
                     } else if (typeof item[key] === 'string' && typeof filters[key] === 'string' && !String(item[key]).toLowerCase().includes(filters[key].toLowerCase())) {
                         return false;
+                    } else if ((key === "email" || key === "username") && typeof filters[key] === 'string' && filters[key] !== "") {
+                        if (!item.accounts.some((account: any) => account[key].toLowerCase().includes(filters[key].toLowerCase()))) {
+                            return false;
+                        }
                     }
                 }
             }
