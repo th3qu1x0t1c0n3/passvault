@@ -9,6 +9,7 @@ import Header from "../utils/Header";
 import {PwdmanagerServerInstance} from "../../App";
 import {UserService} from "../../services/UserService";
 import {toast} from "react-toastify";
+import Footer from "../utils/Footer";
 
 function Main() {
     const navigate = useNavigate();
@@ -54,6 +55,8 @@ function Main() {
                     </div>
                 </div>
             </main>
+
+            <Footer />
         </div>
     );
 }
