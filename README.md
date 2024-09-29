@@ -1,5 +1,10 @@
 # PassVault
 
+# TODO
+- Create chrome extension
+- Update Routing to Signin first
+- 
+
 ## Deployment
 1. Change spring properties 
 2. Check if CMD is working
