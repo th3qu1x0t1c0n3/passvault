@@ -2,8 +2,8 @@
 
 # TODO
 - Create chrome extension
-- Update Routing to Signin first
-- 
+- Add create app & account
+
 
 ## Deployment
 1. Change spring properties 
