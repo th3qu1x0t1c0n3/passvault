@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import axios from "axios";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Learn React a
         </a>
       </header>
     </div>
@@ -24,3 +25,13 @@ function App() {
 }
 
 export default App;
+
+export const PwdmanagerServerInstance = axios.create({
+  baseURL: 'https://passvault.quixotic.date/api/v1',
+  // baseURL: 'http://localhost:8087/api/v1',
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+  },
+  params: {}
+});
