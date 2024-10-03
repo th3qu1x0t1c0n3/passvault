@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import quixotic.personnal.passvault.dto.AccountDTO;
+import quixotic.personnal.passvault.dto.AppAccountDTO;
 import quixotic.personnal.passvault.dto.ApplicationDTO;
 import quixotic.personnal.passvault.service.AccountService;
 
@@ -20,6 +21,11 @@ public class AccountController {
     @PostMapping("/add")
     public ResponseEntity<AccountDTO> addAccount(@RequestHeader("Authorization") String token, @RequestBody AccountDTO accountDTO) {
         return ResponseEntity.accepted().body(accountService.addAccount(token, accountDTO));
+    }
+
+    @PostMapping("/app")
+    public ResponseEntity<ApplicationDTO> addAppAccount(@RequestHeader("Authorization") String token, @RequestBody AppAccountDTO appAccountDTO) {
+        return ResponseEntity.accepted().body(accountService.addAppAccount(token, appAccountDTO));
     }
 
     @GetMapping("/all")

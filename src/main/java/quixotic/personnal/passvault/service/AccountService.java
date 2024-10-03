@@ -4,11 +4,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import quixotic.personnal.passvault.dto.AccountDTO;
+import quixotic.personnal.passvault.dto.AppAccountDTO;
+import quixotic.personnal.passvault.dto.ApplicationDTO;
 import quixotic.personnal.passvault.exception.forbiddenRequestExceptions.WrongUserException;
 import quixotic.personnal.passvault.model.Account;
 import quixotic.personnal.passvault.model.Application;
 import quixotic.personnal.passvault.repository.AccountRepository;
 import quixotic.personnal.passvault.repository.ApplicationRepository;
+import quixotic.personnal.passvault.repository.UserRepository;
 import quixotic.personnal.passvault.security.JwtTokenProvider;
 
 import java.util.List;
@@ -20,6 +23,7 @@ public class AccountService {
     private final JwtTokenProvider jwtTokenProvider;
     private final ApplicationRepository applicationRepository;
     private final AccountRepository accountRepository;
+    private UserRepository userRepository;
 
 
     public AccountDTO addAccount(String token, AccountDTO accountDTO) {
@@ -31,6 +35,18 @@ public class AccountService {
         application.addAccount(account);
 
         return new AccountDTO(accountRepository.save(account));
+    }
+
+    public ApplicationDTO addAppAccount(String token, AppAccountDTO appAccountDTO) {
+        String username = jwtTokenProvider.getUsernameFromJWT(token);
+        Application application = appAccountDTO.toApp();
+        Account account = appAccountDTO.toAccount();
+
+        application.setOwner(userRepository.findByUsername(username).orElseThrow());
+        application.addAccount(account);
+        account.setApplication(application);
+
+        return new ApplicationDTO(applicationRepository.save(application));
     }
 
     public List<AccountDTO> getAccountByApplicationId(Long id) {
