@@ -3,7 +3,6 @@ package quixotic.personnal.passvault.controller;
 import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import quixotic.personnal.passvault.dto.AccountDTO;
 import quixotic.personnal.passvault.dto.AppAccountDTO;

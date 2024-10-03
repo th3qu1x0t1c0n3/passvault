@@ -2,8 +2,6 @@
 
 # TODO
 - Create chrome extension
-- Add create app & account
-
 
 ## Deployment
 1. Change spring properties 
