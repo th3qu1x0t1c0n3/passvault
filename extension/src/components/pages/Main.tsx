@@ -3,12 +3,43 @@ import Header from "../utils/Header";
 import PageNotFound from "../utils/PageNotFound";
 import Footer from "../utils/Footer";
 import {IUser} from "../../assets/models/Authentication";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Home from "./Home";
+import SignIn from "./SignIn";
+import {PwdmanagerServerInstance} from "../../App";
+import {getMe} from "../../service/UserService";
+import {toast} from "react-toastify";
 
 function Main() {
     const navigate = useNavigate();
     const [user, setUser] = useState<IUser | null>(null);
+
+    useEffect(() => {
+        const token = localStorage.getItem('token_pm');
+
+        if (token) {
+            PwdmanagerServerInstance.defaults.headers.common['Authorization'] = "Bearer " + token;
+
+            getMe().then(response => {
+                setUser(response);
+                // navigate("/u/");
+            }).catch(error => {
+                toast.error(error.response?.data.message);
+            })
+        } else {
+            setUser(null);
+            localStorage.removeItem('token_pm');
+            PwdmanagerServerInstance.defaults.headers.common['Authorization'] = '';
+            // navigate("/");
+        }
+    }, []);
+    useEffect(() => {
+        if (user) {
+            navigate("/u/");
+        } else {
+            navigate("/");
+        }
+    }, [user]);
 
     return (
         <div className={"text-pwdm-four"}>
@@ -18,7 +49,7 @@ function Main() {
                 <div className="flex">
                     <div className="w-11/12 mx-auto">
                         <Routes>
-                            <Route path={"/"} element={<div>Home route</div>} />
+                            <Route path={"/"} element={<SignIn setUser={setUser} />} />
                             <Route path={"/u/*"} element={<Home />} />
 
                             <Route path="*" element={<PageNotFound/>}/>

@@ -24,7 +24,7 @@ function Main() {
 
             userService.getMe().then(response => {
                 setUser(response);
-                navigate("/u/");
+                // navigate("/u/");
             }).catch(error => {
                 toast.error(error.response?.data.message);
             })
@@ -32,9 +32,16 @@ function Main() {
             setUser(null);
             localStorage.removeItem('token_pm');
             PwdmanagerServerInstance.defaults.headers.common['Authorization'] = '';
-            navigate("/");
+            // navigate("/");
         }
     }, []);
+    useEffect(() => {
+        if (user) {
+            navigate("/u/");
+        } else {
+            navigate("/");
+        }
+    }, [user]);
 
 
     return (
