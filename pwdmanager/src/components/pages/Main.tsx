@@ -12,12 +12,12 @@ import {toast} from "react-toastify";
 import Footer from "../utils/Footer";
 
 function Main() {
-    const navigate = useNavigate();
     const userService = new UserService();
+    const navigate = useNavigate();
     const [user, setUser] = useState<IUser | null>(null);
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('token_pm');
 
         if (token) {
             PwdmanagerServerInstance.defaults.headers.common['Authorization'] = "Bearer " + token;
@@ -30,7 +30,7 @@ function Main() {
             })
         } else {
             setUser(null);
-            localStorage.removeItem('token');
+            localStorage.removeItem('token_pm');
             PwdmanagerServerInstance.defaults.headers.common['Authorization'] = '';
             navigate("/");
         }

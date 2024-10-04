@@ -13,7 +13,7 @@ function Header({user, setUser}: IHeaderProps) {
 
     function disconnect() {
         setUser(null);
-        localStorage.removeItem('token');
+        localStorage.removeItem('token_pm');
         PwdmanagerServerInstance.defaults.headers.common['Authorization'] = '';
         navigate("/signin");
     }
