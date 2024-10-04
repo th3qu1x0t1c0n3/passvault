@@ -11,3 +11,10 @@ export interface IAccount {
     username: string;
     password: string;
 }
+export interface IAppAccount {
+    name: string;
+    url: string;
+    email: string;
+    username: string;
+    password: string;
+}

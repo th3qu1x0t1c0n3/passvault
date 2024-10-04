@@ -1,5 +1,5 @@
 import {PwdmanagerServerInstance} from "../App";
-import {IAccount, IApplication} from "../assets/models/Vault";
+import {IAccount, IAppAccount, IApplication} from "../assets/models/Vault";
 
 // Applications
 export async function createApplication(app: IApplication) {
@@ -33,6 +33,11 @@ export async function createAccount(account: IAccount) {
     return PwdmanagerServerInstance.post(`/account/add`, account).then((response) => {
         return response.data;
     });
+}
+export async function createAppAccount(appAccount: IAppAccount){
+    return PwdmanagerServerInstance.post(`/account/app`, appAccount).then((response) => {
+        return response.data;
+    })
 }
 export async function getAccountsByApplication(appId: string) {
     return PwdmanagerServerInstance.get(`/account/all?id=${appId}`).then((response) => {
