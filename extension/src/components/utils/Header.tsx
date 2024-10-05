@@ -1,7 +1,5 @@
-import {useNavigate} from "react-router-dom";
 import {IUser} from "../../assets/models/Authentication";
-import {PwdmanagerServerInstance} from "../../App";
-import Button from "./Button";
+import VerticalDotButton from "./VerticalDotButton";
 
 interface IHeaderProps {
     user: IUser | null;
@@ -9,34 +7,24 @@ interface IHeaderProps {
 }
 
 function Header({user, setUser}: IHeaderProps) {
-    const navigate = useNavigate();
-
-    function disconnect() {
-        setUser(null);
-        localStorage.removeItem('token');
-        PwdmanagerServerInstance.defaults.headers.common['Authorization'] = '';
-        navigate("/signin");
-    }
 
     return (
-        <div className="grid grid-cols-2 p-4 bg-pwdm-two font-semibold text-justify">
-            {/*<div onClick={() => user === null ? navigate("/") : navigate("/u/")}>*/}
-            {/*    <h1 className="text-2xl font-bold clickable inline-block ms-2">Password Manager</h1>*/}
-            {/*</div>*/}
+        <div className="grid grid-cols-3 p-4 bg-pwdm-two font-semibold text-justify">
             {
                 user !== null ?
                     <>
-                        <div className="flex justify-center">
+                        <div className="flex justify-center col-span-2">
                             <h1 className={"text-4xl"}>{user.username}</h1>
                         </div>
-                        <div className={"text-right"}>
-                            <Button text={"Disconnect"} type={"button"} onClick={disconnect}/>
+                        <div className={"text-end my-auto"}>
+                            <VerticalDotButton setUser={setUser} user={user}/>
                         </div>
                     </> :
                     <>
                         <div className="flex justify-center col-span-full">
                             <h1 className={"text-4xl"}>Sign in</h1>
                         </div>
+
                     </>
             }
         </div>
