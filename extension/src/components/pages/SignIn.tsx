@@ -35,12 +35,8 @@ function SignIn({setUser}: ISignProps) {
                 password: ''
             })
         }
+
     }, []);
-
-    useEffect(() => {
-        console.log(signinForm);
-    }, [signinForm]);
-
 
     function handleChange(e: any) {
         setSigninFromInfo(signinFormInfo.map((formInfo) => {

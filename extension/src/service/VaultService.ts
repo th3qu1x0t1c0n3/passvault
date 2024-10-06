@@ -12,6 +12,12 @@ export async function getAllApplications() {
         return response.data;
     });
 }
+export async function getApplicationsByUrl(url: string) {
+    return PwdmanagerServerInstance.get(`/apps/url?url=${url}`).then((response) => {
+        return response.data;
+    });
+
+}
 export async function getApplication(appId: string) {
     return PwdmanagerServerInstance.get(`/apps?id=${appId}`).then((response) => {
         return response.data;
@@ -39,7 +45,7 @@ export async function createAppAccount(appAccount: IAppAccount){
         return response.data;
     })
 }
-export async function getAccountsByApplication(appId: string) {
+export async function getAccountsByApplication(appId: number) {
     return PwdmanagerServerInstance.get(`/account/all?id=${appId}`).then((response) => {
         return response.data;
     });

@@ -10,7 +10,6 @@ import NewRecord from "./NewRecord";
 import UpdateAccount from "./UpdateAccount";
 import UpdateApp from "./UpdateApp";
 import {IUser} from "../../assets/models/Authentication";
-import {IFilters} from "../../assets/models/Form";
 
 interface IHomeProps {
     user: IUser;

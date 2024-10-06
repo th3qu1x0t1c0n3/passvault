@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEllipsisV, faHome, faLock, faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
+import {faArrowUpRightFromSquare, faEllipsisV, faHome, faLock, faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
 import {useNavigate} from "react-router-dom";
 import {PwdmanagerServerInstance} from "../../App";
 import {IUser} from "../../assets/models/Authentication";
@@ -24,7 +24,6 @@ function VerticalDotButton({setUser, user}: IVerticalDotButtonProps) {
         localStorage.removeItem('token_pm');
         PwdmanagerServerInstance.defaults.headers.common['Authorization'] = '';
         navigate("/signin");
-
     }
 
     function togglePopup() {
@@ -41,6 +40,11 @@ function VerticalDotButton({setUser, user}: IVerticalDotButtonProps) {
                     className="absolute right-0 mt-2 w-48 bg-pwdm-one border border-pwdm-four rounded shadow-lg text-start"
                     onClick={togglePopup}>
                     <ul>
+                        <li className="p-2 hover:bg-pwdm-two cursor-pointer"
+                            onClick={() => window.open("https://passmanager.quixotic.date/", '_blank')}>
+                            <FontAwesomeIcon icon={faArrowUpRightFromSquare} className={"me-2"}/>
+                            Full website
+                        </li>
                         <li className="p-2 hover:bg-pwdm-two cursor-pointer"
                             onClick={() => user === null ? navigate("/") : navigate("/u/")}>
                             <FontAwesomeIcon icon={faHome} className={"me-2"}/>
