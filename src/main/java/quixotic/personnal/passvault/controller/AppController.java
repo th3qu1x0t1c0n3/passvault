@@ -32,6 +32,11 @@ public class AppController {
         return ResponseEntity.accepted().body(appService.getAppById(id));
     }
 
+    @GetMapping("/url")
+    public ResponseEntity<List<ApplicationDTO>> getAllAppsByUrl(@PathParam("url") String url) {
+        return ResponseEntity.accepted().body(appService.getAllAppsByUrl(url));
+    }
+
     @GetMapping("/name")
     public ResponseEntity<ApplicationDTO> getAppByName(@RequestHeader("Authorization") String token, @PathParam("name") String name) {
         return ResponseEntity.accepted().body(appService.getAppByName(token, name));

@@ -38,6 +38,12 @@ public class AppService {
         return new ApplicationDTO(applicationRepository.findById(id).orElseThrow());
     }
 
+    public List<ApplicationDTO> getAllAppsByUrl(String url) {
+        return applicationRepository.findAllByUrlContainsIgnoreCase(url).stream()
+                .map(ApplicationDTO::new)
+                .collect(Collectors.toList());
+    }
+
     public ApplicationDTO getAppByName(String token, String name) {
         String username = jwtTokenProvider.getUsernameFromJWT(token);
 
