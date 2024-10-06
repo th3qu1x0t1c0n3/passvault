@@ -92,7 +92,7 @@ function AccountForm({application, user}: IAccountFormProps) {
             <h1>Account Form</h1>
 
             <Form formInputs={accountFormInfo} handleSubmit={handleSubmit} handleChange={handleChange}
-                  buttons={accountButton}/>
+                  buttons={accountButton} fieldForm={accountForm}/>
 
             {
                 submitting &&

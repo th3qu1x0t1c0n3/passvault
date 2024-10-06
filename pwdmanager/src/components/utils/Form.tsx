@@ -9,9 +9,10 @@ interface IFormInput {
     handleChange: (e: any) => void;
     formInputs: FormInput[];
     buttons?: IButton[];
+    fieldForm: any;
 }
 
-function Form({handleSubmit, handleChange, formInputs, buttons}: IFormInput) {
+function Form({handleSubmit, handleChange, formInputs, buttons, fieldForm}: IFormInput) {
     const [showPassword, setShowPassword] = useState(false);
 
     return (
@@ -33,6 +34,7 @@ function Form({handleSubmit, handleChange, formInputs, buttons}: IFormInput) {
                                                 className={`${formInfo.warning !== '' ? "border-red" : "border-gray-300"} col-span-9 form-input border rounded-md p-2 w-full text-pwdm-one`}
                                                 id={formInfo.name}
                                                 onChange={handleChange}
+                                                defaultValue={fieldForm[formInfo.name as keyof typeof fieldForm]}
                                                 type={formInfo.type === 'password' && showPassword ? 'text' : formInfo.type}
                                                 placeholder={formInfo.placeholder}/>
                                             {

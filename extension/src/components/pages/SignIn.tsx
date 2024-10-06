@@ -1,5 +1,5 @@
 import {useNavigate} from "react-router-dom";
-import {FormEvent, useState} from "react";
+import {FormEvent, useEffect, useState} from "react";
 import FormInput, {IButton, ISignProps} from "../../assets/models/Form";
 import Form from "../utils/Form";
 import {toast} from "react-toastify";
@@ -8,7 +8,6 @@ import {signIn} from "../../service/UserService";
 
 function SignIn({setUser}: ISignProps) {
     const navigate = useNavigate();
-
     const [signinForm, setSigninForm] = useState({
         username: '',
         password: '',
@@ -28,6 +27,21 @@ function SignIn({setUser}: ISignProps) {
         }
     ]
 
+    useEffect(() => {
+        const username = localStorage.getItem('username_pm');
+        if (username) {
+            setSigninForm({
+                username: username,
+                password: ''
+            })
+        }
+    }, []);
+
+    useEffect(() => {
+        console.log(signinForm);
+    }, [signinForm]);
+
+
     function handleChange(e: any) {
         setSigninFromInfo(signinFormInfo.map((formInfo) => {
             if (formInfo.name === e.target.id)
@@ -43,6 +57,7 @@ function SignIn({setUser}: ISignProps) {
         signIn(signinForm).then(response => {
             setUser(response);
             localStorage.setItem('token_pm', response.token);
+            localStorage.setItem('username_pm', response.username);
             PwdmanagerServerInstance.defaults.headers.common['Authorization'] = "Bearer " + response.token;
             toast.success("Signed In Successfully!");
 
@@ -54,7 +69,8 @@ function SignIn({setUser}: ISignProps) {
 
     return (
         <div>
-            <Form formInputs={signinFormInfo} handleSubmit={handleSubmit} handleChange={handleChange} buttons={signinButton}/>
+            <Form formInputs={signinFormInfo} handleSubmit={handleSubmit} handleChange={handleChange}
+                  buttons={signinButton} fieldForm={signinForm}/>
         </div>
     );
 }

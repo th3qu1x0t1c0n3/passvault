@@ -15,13 +15,13 @@ function VerticalDotButton({setUser, user}: IVerticalDotButtonProps) {
     const navigate = useNavigate();
 
     function disconnect() {
-        LockManager();
+        lockManager();
         localStorage.removeItem('username_pm');
     }
 
-    function LockManager() {
+    function lockManager() {
         setUser(null);
-        localStorage.removeItem('token');
+        localStorage.removeItem('token_pm');
         PwdmanagerServerInstance.defaults.headers.common['Authorization'] = '';
         navigate("/signin");
 
@@ -50,7 +50,7 @@ function VerticalDotButton({setUser, user}: IVerticalDotButtonProps) {
                             <FontAwesomeIcon icon={faSignOutAlt} className={"me-2"}/>
                             Disconnect
                         </li>
-                        <li className="p-2 hover:bg-pwdm-two cursor-pointer" onClick={disconnect}>
+                        <li className="p-2 hover:bg-pwdm-two cursor-pointer" onClick={lockManager}>
                             <FontAwesomeIcon icon={faLock} className={"me-2"}/>
                             Lock manager
                         </li>

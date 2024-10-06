@@ -60,7 +60,7 @@ function SignIn({setUser}: ISignProps) {
 
     return (
         <div>
-            <Form formInputs={signinFormInfo} handleSubmit={handleSubmit} handleChange={handleChange} buttons={signinButton}/>
+            <Form formInputs={signinFormInfo} handleSubmit={handleSubmit} handleChange={handleChange} buttons={signinButton} fieldForm={signinForm}/>
         </div>
     );
 }

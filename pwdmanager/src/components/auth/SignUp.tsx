@@ -65,7 +65,7 @@ function SignUp({setUser}: ISignProps) {
 
     return (
         <div>
-            <Form formInputs={createFormInfo} handleSubmit={handleSubmit} handleChange={handleCreationChange} buttons={signinButton}/>
+            <Form formInputs={createFormInfo} handleSubmit={handleSubmit} handleChange={handleCreationChange} buttons={signinButton} fieldForm={creationForm}/>
         </div>
     );
 }

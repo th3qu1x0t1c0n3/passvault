@@ -53,7 +53,7 @@ function ApplicationForm({getAllApplications}: IApplicationFormProps) {
     return (
         <div>
             <h1>Application Form</h1>
-            <Form formInputs={appFormInfo} handleSubmit={handleSubmit} handleChange={handleChange} buttons={appButton}/>
+            <Form formInputs={appFormInfo} handleSubmit={handleSubmit} handleChange={handleChange} buttons={appButton} fieldForm={appForm}/>
         </div>
     )
 }
