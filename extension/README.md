@@ -1,6 +1,7 @@
 # Todo
 1. decrypt the password on signin
-2. 
+2. Auto fill the form on signin
+3. Auto save the form on signup
 
 # Getting Started with Create React App
 
