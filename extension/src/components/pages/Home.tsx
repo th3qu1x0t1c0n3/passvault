@@ -1,8 +1,10 @@
-import {Routes} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import {IAccount, IApplication} from "../../assets/models/Vault";
 import {useEffect, useState} from "react";
-import {getAccountsByApplication, getApplicationsByUrl} from "../../service/VaultService";
+import {deleteApplication, getAccountsByApplication, getApplicationsByUrl} from "../../service/VaultService";
 import {toast} from "react-toastify";
+import PageNotFound from "../utils/PageNotFound";
+import AccountList from "../Account/AccountList";
 
 function Home() {
     const [application, setApplication] = useState<IApplication>({accounts: [], id: 0, name: "", url: ""});
@@ -30,19 +32,22 @@ function Home() {
         })
     }
 
+    function handleDelete(e: any) {
+        e.stopPropagation();
+        deleteApplication(application.id).then((response) => {
+            getAccounts();
+            toast.success("Application deleted successfully!");
+        }).catch((error) => {
+            toast.error(error.response?.data.message);
+        })
+    }
+
     return (
         <div>
-            <div>Home route</div>
+            <h1 className={"text-4xl"}>View for {application.name} at {application.url}</h1>
             <Routes>
-                {/*<Route path={"/"} element={<AppList applications={applications} getAllApplications={getAllApplications}
-                                                    user={user}/> }/>*/}
-                {/*<Route path={"/new"}
-                       element={<NewRecord getAllApplications={getAllApplications} applications={applications}
-                                           user={user}/>}/>*/}
-                {/*<Route path={"/updateApp"} element={<UpdateApp/>}/>*/}
-                {/*<Route path={"/updateAcc"} element={<UpdateAccount user={user}/>}/>*/}
-                {/*<Route path="*" element={<PageNotFound/>}/>*/}
-
+                <Route path={"/"} element={<AccountList accounts={accounts} deleteAccount={handleDelete} />}/>
+                <Route path="*" element={<PageNotFound/>}/>
             </Routes>
         </div>
     );
