@@ -1,7 +1,7 @@
 import {IAccount} from "../../assets/models/Vault";
 import PasswordView from "../utils/PasswordView";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faTrash} from "@fortawesome/free-solid-svg-icons";
+import {faSync, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {useNavigate} from "react-router-dom";
 
 interface AccountViewProps {
@@ -25,7 +25,7 @@ function AccountView({account, deleteAccount}: AccountViewProps) {
                 <PasswordView password={account.password}/>
 
                 <div className={"text-right my-auto p-1 px-2"}>
-                    {/*<FontAwesomeIcon className={"mx-2"} onClick={updateAcc} icon={faSync}/>*/}
+                    <FontAwesomeIcon className={"mx-2"} onClick={updateAcc} icon={faSync}/>
                     <FontAwesomeIcon className={"mx-2"} onClick={() => deleteAccount(account)} icon={faTrash}/>
                 </div>
             </div>

@@ -44,7 +44,7 @@ function Home() {
 
     return (
         <div>
-            <h1 className={"text-4xl"}>View for {application.name} at {application.url}</h1>
+            <h1 className={"text-4xl"}>App {application.name} at {application.url}</h1>
             <Routes>
                 <Route path={"/"} element={<AccountList accounts={accounts} deleteAccount={handleDelete} />}/>
                 <Route path="*" element={<PageNotFound/>}/>
