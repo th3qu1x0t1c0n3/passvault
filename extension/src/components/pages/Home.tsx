@@ -50,11 +50,12 @@ function Home({user}: IHomeProps) {
     return (
         <div>
             <h1 className={"text-4xl"}>App {application.name} at {application.url}</h1>
-            <Routes>
-                <Route path={"/"} element={<AccountList accounts={accounts} deleteAccount={handleDelete} />}/>
-                <Route path={"/updateAcc"} element={<UpdateAccount user={user}/>}/>
-                <Route path="*" element={<PageNotFound/>}/>
-            </Routes>
+            <AccountList accounts={accounts} deleteAccount={handleDelete} />
+            {/*<Routes>*/}
+            {/*    <Route path={"/"} element={<AccountList accounts={accounts} deleteAccount={handleDelete} />}/>*/}
+            {/*    <Route path={"/updateAcc"} element={<UpdateAccount user={user}/>}/>*/}
+            {/*    <Route path="*" element={<PageNotFound/>}/>*/}
+            {/*</Routes>*/}
         </div>
     );
 }

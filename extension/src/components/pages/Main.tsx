@@ -9,6 +9,7 @@ import SignIn from "./SignIn";
 import {PwdmanagerServerInstance} from "../../App";
 import {getMe} from "../../service/UserService";
 import {toast} from "react-toastify";
+import UpdateAccount from "./UpdateAccount";
 
 function Main() {
     const navigate = useNavigate();
@@ -49,8 +50,15 @@ function Main() {
                 <div className="flex">
                     <div className="w-11/12 mx-auto">
                         <Routes>
-                            <Route path={"/"} element={<SignIn setUser={setUser} />} />
-                            { user && <Route path={"/u/*"} element={<Home user={user}/>}/>}
+                            <Route path={"/"} element={<SignIn setUser={setUser}/>}/>
+                            {user &&
+                                <>
+                                    {/*<Route path={"/u/*"} element={<Home user={user}/>}/>*/}
+                                    <Route path={"/home"} element={<Home user={user}/>}/>
+                                    <Route path={"/updateAcc"} element={<UpdateAccount user={user}/>}/>
+
+                                </>
+                            }
 
                             <Route path="*" element={<PageNotFound/>}/>
                         </Routes>
@@ -58,7 +66,7 @@ function Main() {
                 </div>
             </main>
 
-            <Footer />
+            <Footer/>
         </div>
     );
 }
