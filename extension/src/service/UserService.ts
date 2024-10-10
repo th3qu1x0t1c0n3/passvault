@@ -1,5 +1,5 @@
 import {PwdmanagerServerInstance} from "../App";
-import {IsignIn, IsignUp} from "../assets/models/Authentication";
+import {IsignIn} from "../assets/models/Authentication";
 
 
 export async function signIn(signin: IsignIn) {
