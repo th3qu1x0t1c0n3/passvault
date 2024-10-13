@@ -16,7 +16,7 @@ function ApplicationFilter({filters, setFilters}: IFiltersProps) {
     };
 
     return (
-        <div className="grid xl:grid-cols-4 grid-cols-2 gap-1 text-center md:w-3/5 w-10/12 mx-auto">
+        <div className="grid xl:grid-cols-4 sm:grid-cols-2 gap-1 text-center md:w-3/5 w-10/12 mx-auto">
             <h1 className={"text-2xl col-span-full"}>Filter Applications</h1>
             <div>
                 <label className={"mx-2 block"}>Name</label>

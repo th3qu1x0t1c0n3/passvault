@@ -27,7 +27,7 @@ function Header({user, setUser}: IHeaderProps) {
                 user !== null ?
                     <>
                         <div className="flex justify-center">
-                            <h1 className={"text-4xl"}>Welcome {user.username}</h1>
+                            <h1 className={"text-4xl invisible sm:visible"}>Welcome {user.username}</h1>
                         </div>
                         <div className={"text-right"}>
                             <Button text={"Disconnect"} type={"button"} onClick={disconnect}/>

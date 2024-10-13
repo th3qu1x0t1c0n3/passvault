@@ -1,8 +1,11 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowUpRightFromSquare, faCopy} from "@fortawesome/free-solid-svg-icons";
 import {toast} from "react-toastify";
+import { useMediaQuery } from 'react-responsive';
 
 function Footer() {
+    const isLg = useMediaQuery({ query: '(min-width: 1024px)' });
+    const isMd = useMediaQuery({ query: '(min-width: 768px) and (max-width: 1023px)' });
 
     function copyClipboard(copy: string) {
         navigator.clipboard.writeText(copy)
@@ -12,6 +15,14 @@ function Footer() {
             .catch((error) => {
                 toast.error('Failed to copy to clipboard: ' + error);
             });
+    }
+
+    function getWallet(address: string) {
+        if (isLg || isMd) {
+            return address;
+        } else {
+            return `${address.slice(0, 5)}...${address.slice(-3)}`;
+        }
     }
 
     return (
@@ -27,17 +38,17 @@ function Footer() {
                         </li>
                         <li className={"clickable"}
                             onClick={() => copyClipboard("0x177DA3298468DFBA273ea51c06F308d95045E597")}>Ethereum:
-                            <span> 0x177DA3298468DFBA273ea51c06F308d95045E597</span>
+                            <span> {getWallet("0x177DA3298468DFBA273ea51c06F308d95045E597")}</span>
                             <FontAwesomeIcon className={"ms-2"} icon={faCopy}/>
                         </li>
                         <li className={"clickable"}
                             onClick={() => copyClipboard("bc1qm7t9gkqml4csh8fa66tl7su8fvtjevy5tujca9")}>Bitcoin:
-                            <span> bc1qm7t9gkqml4csh8fa66tl7su8fvtjevy5tujca9</span>
+                            <span> {getWallet("bc1qm7t9gkqml4csh8fa66tl7su8fvtjevy5tujca9")}</span>
                             <FontAwesomeIcon className={"ms-2"} icon={faCopy}/>
                         </li>
                         <li className={"clickable"}
                             onClick={() => copyClipboard("3z4bqVarj6CiMFJYiCyu4CGqNjQLDGAeQE8PTnSR87wh")}>Solana:
-                            <span> 3z4bqVarj6CiMFJYiCyu4CGqNjQLDGAeQE8PTnSR87wh</span>
+                            <span> {getWallet("3z4bqVarj6CiMFJYiCyu4CGqNjQLDGAeQE8PTnSR87wh")}</span>
                             <FontAwesomeIcon className={"ms-2"} icon={faCopy}/>
                         </li>
                     </ul>

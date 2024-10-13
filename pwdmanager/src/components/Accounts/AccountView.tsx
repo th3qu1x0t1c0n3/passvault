@@ -3,6 +3,7 @@ import PasswordView from "../utils/PasswordView";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSync, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {useNavigate} from "react-router-dom";
+import { useMediaQuery } from 'react-responsive';
 
 interface AccountViewProps {
     account: IAccount;
@@ -11,6 +12,7 @@ interface AccountViewProps {
 
 function AccountView({account, deleteAccount}: AccountViewProps) {
     const navigate = useNavigate();
+    const isMd = useMediaQuery({ query: '(min-width: 768px) and (max-width: 1023px)' });
 
     function updateAcc(e: any) {
         e.stopPropagation();
@@ -29,7 +31,6 @@ function AccountView({account, deleteAccount}: AccountViewProps) {
                     <FontAwesomeIcon className={"mx-2"} onClick={() => deleteAccount(account)} icon={faTrash}/>
                 </div>
             </div>
-
         </div>
     )
 

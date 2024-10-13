@@ -103,7 +103,7 @@ function ApplicationView({application, getAllApplications, user}: ApplicationVie
                  onClick={() => setOpen(!open)}>
                 <h1 className="text-2xl ml-9 font-semibold">{application.name}</h1>
                 <h1 className="text-center my-auto">
-                    <span className={"mx-2"}>{application.url}</span>
+                    <span className={"mx-2 invisible sm:visible"}>{application.url}</span>
                     <FontAwesomeIcon className={"clickable"}
                                      onClick={(event) => handleNavigate(application.url, event)}
                                      icon={faArrowUpRightFromSquare}/>

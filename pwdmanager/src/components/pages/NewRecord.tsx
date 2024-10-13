@@ -22,7 +22,7 @@ function NewRecord({applications, getAllApplications, user}: INewRecordProps) {
         <div>
             <h1 className={"text-4xl mt-2"}>New Record</h1>
             <h1 className={"text-2xl mt-2"}>Add new Application or select one to add an Account</h1>
-            <select name="apps" id="" onChange={handleSelected} className={"mt-2 block w-1/5 mx-auto p-2 border border-pwdm-four rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-pwdm-four focus:border-pwdm-four"}>
+            <select name="apps" id="" onChange={handleSelected} className={"mt-2 block lg:w-1/5 w-5/12 mx-auto p-2 border border-pwdm-four rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-pwdm-four focus:border-pwdm-four"}>
                 <option value={0}>Add new Application</option>
                 {applications.map((app) => (
                     <option key={app.id} value={app.id}>{app.name}</option>

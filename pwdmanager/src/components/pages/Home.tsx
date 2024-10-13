@@ -34,7 +34,7 @@ function Home({user}: IHomeProps) {
 
     return (
         <div>
-            <div className={"grid grid-cols-2 gap-2 w-1/4 mx-auto mt-4"}>
+            <div className={"grid grid-cols-2 gap-2 md:w-1/4 mx-auto mt-4"}>
                 <Button text={"Home"} type={"button"} onClick={() => {
                     getAllApplications();
                     navigate('/u/');
