@@ -18,9 +18,6 @@ function Footer() {
         <footer className={"bg-pwdm-two mt-5 py-5 text-pwdm-four"}>
             <h1 className={"text-2xl mb-3"}>Please help the dev :)</h1>
             <div className={"grid grid-cols-3 w-11/12 gap-2 mx-auto"}>
-                <div>
-
-                </div>
                 <div className={"text-center"}>
                     <ul className={""}>
                         <li className={""}>
@@ -44,8 +41,6 @@ function Footer() {
                             <FontAwesomeIcon className={"ms-2"} icon={faCopy}/>
                         </li>
                     </ul>
-                </div>
-                <div>
                 </div>
             </div>
         </footer>
