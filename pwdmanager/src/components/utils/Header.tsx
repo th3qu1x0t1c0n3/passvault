@@ -34,7 +34,7 @@ function Header({user, setUser}: IHeaderProps) {
                         </div>
                     </> :
                     <>
-                        <div className="flex justify-center">
+                        <div className="flex justify-center md:col-span-1 col-span-2">
                             <h1 className={"text-4xl"}>Please Sign in or Sign up</h1>
                         </div>
                     </>

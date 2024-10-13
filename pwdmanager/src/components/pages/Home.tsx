@@ -47,7 +47,6 @@ function Home({user}: IHomeProps) {
                 <Route path={"/new"}
                        element={<NewRecord getAllApplications={getAllApplications} applications={applications}
                                            user={user}/>}/>
-                {/*<Route path={"/updateApp"} element={<EncryptionDecryption />} />*/}
                 <Route path={"/updateApp"} element={<UpdateApp/>}/>
                 <Route path={"/updateAcc"} element={<UpdateAccount user={user}/>}/>
                 <Route path="*" element={<PageNotFound/>}/>

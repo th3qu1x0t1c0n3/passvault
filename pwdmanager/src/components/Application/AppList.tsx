@@ -24,7 +24,7 @@ function AppList({applications, getAllApplications, user}: AppListProps) {
 
     function renderApplications(applications: IApplication[]) {
         return (
-            <div className="grid grid-cols-1 gap-4 w-3/5 mx-auto mt-3">
+            <div className="grid grid-cols-1 gap-4 md:w-3/5 w-11/12 mx-auto mt-3">
                 {
                     applications.map((application, index) => {
                         return (
