@@ -12,7 +12,6 @@ interface AccountViewProps {
 
 function AccountView({account, deleteAccount}: AccountViewProps) {
     const navigate = useNavigate();
-    const isMd = useMediaQuery({ query: '(min-width: 768px) and (max-width: 1023px)' });
 
     function updateAcc(e: any) {
         e.stopPropagation();
