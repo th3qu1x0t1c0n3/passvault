@@ -46,7 +46,7 @@ function UpdateAccount({user}: IAccountFormProps) {
         while (idAccount === null) {
             if (Date.now() - timeStart < 5000) {
                 toast("Account not found, redirecting to home page");
-                navigate('/u/');
+                navigate('/home');
             }
             urlParams = new URLSearchParams(window.location.search);
             idAccount = urlParams.get('idAccount');
@@ -91,7 +91,7 @@ function UpdateAccount({user}: IAccountFormProps) {
             const newAccount = {...accountForm, password: encryptedPassword};
 
             updateAccount(newAccount).then(response => {
-                navigate('/u/');
+                navigate('/home');
                 toast.success("Account Updated successfully!");
             }).catch(error => {
                 toast.error(error.response?.data.message);

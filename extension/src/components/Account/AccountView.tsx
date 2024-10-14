@@ -14,7 +14,8 @@ function AccountView({account, deleteAccount}: AccountViewProps) {
 
     function updateAcc(e: any) {
         e.stopPropagation();
-        navigate('/u/updateAcc?idAccount=' + account.id);
+        navigate('/updateAcc?idAccount=' + account.id);
+        // navigate('/u/updateAcc?idAccount=' + account.id);
     }
 
     return (

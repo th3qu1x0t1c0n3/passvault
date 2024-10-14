@@ -57,7 +57,7 @@ function SignIn({setUser}: ISignProps) {
             PwdmanagerServerInstance.defaults.headers.common['Authorization'] = "Bearer " + response.token;
             toast.success("Signed In Successfully!");
 
-            navigate('/u/');
+            navigate('/home');
         }).catch(error => {
             toast.error(error.response?.data.message);
         })

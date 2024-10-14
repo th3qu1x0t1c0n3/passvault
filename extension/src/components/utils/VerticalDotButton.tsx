@@ -46,7 +46,7 @@ function VerticalDotButton({setUser, user}: IVerticalDotButtonProps) {
                             Full website
                         </li>
                         <li className="p-2 hover:bg-pwdm-two cursor-pointer"
-                            onClick={() => user === null ? navigate("/") : navigate("/u/")}>
+                            onClick={() => user === null ? navigate("/") : navigate("/home")}>
                             <FontAwesomeIcon icon={faHome} className={"me-2"}/>
                             Home page
                         </li>

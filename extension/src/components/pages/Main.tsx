@@ -36,7 +36,7 @@ function Main() {
     }, []);
     useEffect(() => {
         if (user) {
-            navigate("/u/");
+            navigate("/home");
         } else {
             navigate("/");
         }
