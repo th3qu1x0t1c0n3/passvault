@@ -23,7 +23,6 @@ function Main() {
 
             getMe().then(response => {
                 setUser(response);
-                // navigate("/u/");
             }).catch(error => {
                 toast.error(error.response?.data.message);
             })
@@ -31,7 +30,6 @@ function Main() {
             setUser(null);
             localStorage.removeItem('token_pm');
             PwdmanagerServerInstance.defaults.headers.common['Authorization'] = '';
-            // navigate("/");
         }
     }, []);
     useEffect(() => {
@@ -53,10 +51,8 @@ function Main() {
                             <Route path={"/"} element={<SignIn setUser={setUser}/>}/>
                             {user &&
                                 <>
-                                    {/*<Route path={"/u/*"} element={<Home user={user}/>}/>*/}
                                     <Route path={"/home"} element={<Home user={user}/>}/>
                                     <Route path={"/updateAcc"} element={<UpdateAccount user={user}/>}/>
-
                                 </>
                             }
 

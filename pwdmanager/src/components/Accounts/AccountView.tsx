@@ -3,7 +3,6 @@ import PasswordView from "../utils/PasswordView";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSync, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {useNavigate} from "react-router-dom";
-import { useMediaQuery } from 'react-responsive';
 
 interface AccountViewProps {
     account: IAccount;

@@ -22,7 +22,7 @@ function App() {
       />
 
       <BrowserRouter>
-        <div className="min-h-screen bg-pwdm-one p-0 m-0 mx-auto" style={{width: "600px"}}>
+        <div className="min-h-screen bg-pwdm-one">
           <Main/>
         </div>
       </BrowserRouter>

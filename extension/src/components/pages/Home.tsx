@@ -12,7 +12,7 @@ interface IHomeProps {
     user: IUser;
 }
 function Home({user}: IHomeProps) {
-    const [application, setApplication] = useState<IApplication>({accounts: [], id: 0, name: "", url: ""});
+    const [application, setApplication] = useState<IApplication>({accounts: [], id: 0, name: "Not found", url: "www.notfound.com"});
     const [accounts, setAccounts] = useState<IAccount[]>([]);
 
     useEffect(() => {
@@ -21,9 +21,14 @@ function Home({user}: IHomeProps) {
 
     function findApplication() {
         const name = window.location.hostname;
+        console.log(name);
         getApplicationsByUrl(name).then((response) => {
-            setApplication(response);
-            setAccounts(application.accounts);
+            if (response.length > 0) {
+                setApplication(response[0]);
+                setAccounts(response[0].accounts);
+            }
+            // setApplication(response);
+            // setAccounts(application.accounts);
         }).catch((error) => {
             toast.error(error.response?.data.message);
         });

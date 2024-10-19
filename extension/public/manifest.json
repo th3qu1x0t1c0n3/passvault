@@ -4,45 +4,36 @@
   "name": "Password manager",
   "description": "This extension is the best way to store and auto-fill your passwords.",
   "version": "1.0",
-  "icons": [
-    {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
-  ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff",
+  "icons": {
+    "64": "favicon.ico",
+    "32": "favicon.ico",
+    "24": "favicon.ico",
+    "16": "favicon.ico",
+    "192": "logo192.png",
+    "512": "logo512.png"
+  },
   "permissions": [
     "activeTab",
     "storage",
     "scripting"
   ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
   "background": {
-    "service_worker": "../src/background/background.js"
+    "service_worker": "background.js"
   },
   "action": {
-    "default_popup": "popup.html",
+    "default_popup": "index.html",
     "default_icon": {
-      "16": "images/lock.jpg"
+      "16": "lock.jpg"
     }
   },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["../src/content/contentScript.js"]
+      "js": ["contentScript.js"]
     }
   ]
 }
