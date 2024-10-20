@@ -13,9 +13,10 @@
     "512": "logo512.png"
   },
   "permissions": [
-    "activeTab",
     "storage",
-    "scripting"
+    "scripting",
+    "activeTab",
+    "tabs"
   ],
   "start_url": ".",
   "display": "standalone",

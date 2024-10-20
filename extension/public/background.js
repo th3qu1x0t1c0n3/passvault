@@ -9,3 +9,27 @@
         // });
     // }
 // });
+chrome.action.onClicked.addListener((tab) => {
+    console.log("Action button clicked."); // Print a message in the console
+    // Query to get the current active tab in the current window
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        if (tabs.length > 0) {
+            const activeTab = tabs[0]; // Get the active tab object
+            console.log("Current Tab URL:", activeTab.url); // Print the URL in the console
+        } else {
+            console.log("No active tab found.");
+        }
+    });
+});
+
+function getCurrentTabUrl() {
+    chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
+        const currentTab = tabs[0];
+        if (currentTab) {
+            console.log('Current Tab URL:', currentTab.url);
+            return currentTab.url;
+        }
+    });
+}
+
+getCurrentTabUrl();
