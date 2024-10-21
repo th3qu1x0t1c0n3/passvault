@@ -1,18 +1,21 @@
-import {Route, Routes} from "react-router-dom";
 import {IAccount, IApplication} from "../../assets/models/Vault";
 import {useEffect, useState} from "react";
 import {deleteApplication, getAccountsByApplication, getApplicationsByUrl} from "../../service/VaultService";
 import {toast} from "react-toastify";
-import PageNotFound from "../utils/PageNotFound";
 import AccountList from "../Account/AccountList";
-import UpdateAccount from "./UpdateAccount";
 import {IUser} from "../../assets/models/Authentication";
 
 interface IHomeProps {
     user: IUser;
 }
+
 function Home({user}: IHomeProps) {
-    const [application, setApplication] = useState<IApplication>({accounts: [], id: 0, name: "Not found", url: "www.notfound.com"});
+    const [application, setApplication] = useState<IApplication>({
+        accounts: [],
+        id: 0,
+        name: "Not found",
+        url: "www.notfound.com"
+    });
     const [accounts, setAccounts] = useState<IAccount[]>([]);
 
     useEffect(() => {
@@ -55,7 +58,7 @@ function Home({user}: IHomeProps) {
     return (
         <div>
             <h1 className={"text-4xl"}>App {application.name} at {application.url}</h1>
-            <AccountList accounts={accounts} deleteAccount={handleDelete} />
+            <AccountList accounts={accounts} deleteAccount={handleDelete}/>
             {/*<Routes>*/}
             {/*    <Route path={"/"} element={<AccountList accounts={accounts} deleteAccount={handleDelete} />}/>*/}
             {/*    <Route path={"/updateAcc"} element={<UpdateAccount user={user}/>}/>*/}
