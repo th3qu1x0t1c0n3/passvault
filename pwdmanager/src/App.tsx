@@ -33,7 +33,8 @@ function App() {
 export default App;
 
 export const PwdmanagerServerInstance = axios.create({
-    baseURL: 'https://passvault.quixotic.date/api/v1',
+    baseURL: process.env.REACT_APP_API_URL,
+    // baseURL: 'https://passvault.quixotic.date/api/v1',
     // baseURL: 'http://localhost:8087/api/v1',
     headers: {
         'Content-Type': 'application/json',
